@@ -1,0 +1,56 @@
+# Segment annotations — Semi-Structured logs.
+#
+# Hand-authored reference shown inside the matching E-item question card in the
+# Empirical wizard. Keyed by log stem (filename without .xes), then by E-item id
+# (E-Sm-BQ-1, E-Sm-BQ-2, E-Sm-IN-1, E-Sm-IN-2). An entry may carry 'segments'
+# (each with a 'name' + 'activities' list, 'note' optional) and/or 'rules'
+# (bullet-point strings). Anything not listed here simply shows no hint.
+#
+# The stable segments below are ARM-style activity relationships the model
+# should reflect, derived from the trace variants of the three semi sample logs
+# (Log02/06/07): each segment is a group of activities that always occurs in a
+# fixed internal order across every trace; "flexible" activities float between
+# or within fragments. They are an orientation, not a ground truth. 100% trace
+# support.
+
+Log02_semiStructured:
+  E-Sm-BQ-1:
+    segments:
+      - name: "Fragment a-b"
+        activities: [a, b]
+        note: "fixed order a then b, always adjacent"
+      - name: "Fragment c-(d|e)"
+        activities: [c, d, e]
+        note: "c first, then exactly one of d or e"
+      - name: "Flexible"
+        activities: [f]
+        note: "f optional and floats; the two fragments also swap order"
+
+Log06_semiStructured:
+  E-Sm-BQ-1:
+    segments:
+      - name: "Fragment a-b-c"
+        activities: [a, b, c]
+        note: "fixed order a then b then c"
+      - name: "Fragment d-{e,f}"
+        activities: [d, e, f]
+        note: "d first, then e and f in any order (parallel)"
+      - name: "Flexible"
+        activities: [g]
+        note: "g floats: before a-b-c, between c and d, or at the end"
+
+Log07_semiStructured:
+  E-Sm-BQ-1:
+    segments:
+      - name: "Fragment a-b"
+        activities: [a, b]
+        note: "fixed order a then b, at the trace start"
+      - name: "Fragment d-(e|f)-g"
+        activities: [d, e, f, g]
+        note: "d, then exactly one of e or f, then g"
+      - name: "Fragment h-i"
+        activities: [h, i]
+        note: "fixed order h then i, but the block's position varies"
+      - name: "Flexible"
+        activities: [c]
+        note: "c optional and floats"

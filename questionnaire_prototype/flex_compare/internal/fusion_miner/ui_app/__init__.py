@@ -1,0 +1,2 @@
+"""FusionMINERful Streamlit app."""
+

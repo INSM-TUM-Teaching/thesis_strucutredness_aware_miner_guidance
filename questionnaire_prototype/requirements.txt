@@ -1,0 +1,17 @@
+# Runtime dependencies for flex_compare.
+# Pinned conservatively (lower bounds only) — tighten for reproducible builds.
+
+dash>=3.0  # React 18 required; Dash 2.x / React 16 breaks Tab-3 callbacks
+plotly>=5.20
+pm4py>=2.7
+pandas>=2.0
+numpy>=1.26
+lxml>=5.0
+PyYAML>=6.0
+
+# Optional but recommended for the report-rendering path in declarative_miner.
+# graphviz>=0.20
+
+# Dev / test extras — install via `pip install -e .[dev]`.
+# pytest>=8.0
+# pytest-cov>=5.0

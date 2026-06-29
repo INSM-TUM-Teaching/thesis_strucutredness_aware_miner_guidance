@@ -1,0 +1,14 @@
+# Segment annotations — Structured logs.
+#
+# Hand-authored reference segments shown inside the matching E-item question
+# card in the Empirical wizard. Keyed by log stem (filename without .xes), then
+# by E-item id (E-S-BQ-1, E-S-BQ-2, E-S-IN-1, E-S-IN-2). Every segment needs a
+# 'name' and an 'activities' list; 'note' is optional.
+#
+# Anything not listed here simply shows no hint. Uncomment and adapt:
+#
+# Log01_structured:
+#   E-S-BQ-1:
+#     segments:
+#       - name: "Main sequence"
+#         activities: [Start, Handle, Close]

@@ -1,0 +1,9 @@
+# Dev/test dependencies for the fusion_miner correctness suite and
+# precision-validation driver. NOT required to run the UI or the pipeline.
+#
+#     pip install -r miners/fusion_miner/requirements_dev.txt
+#
+pytest>=7
+hypothesis>=6
+matplotlib>=3.7
+scipy>=1.10            # optional: Exp 3 falls back to a manual Spearman if missing

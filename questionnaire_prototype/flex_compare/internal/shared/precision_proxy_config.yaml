@@ -1,0 +1,101 @@
+defaults:
+  k: 2
+  playout_method: stochastic
+  n_playout_samples: 1000
+per_log:
+  Log01_structured:
+    playout_bound_B: 10
+    p95_trace_length: 5
+    max_trace_length: 5
+  Log02_semiStructured:
+    playout_bound_B: 10
+    p95_trace_length: 5
+    max_trace_length: 5
+  Log03_looselyStructured:
+    playout_bound_B: 10
+    p95_trace_length: 5
+    max_trace_length: 5
+  Log04_structured:
+    playout_bound_B: 10
+    p95_trace_length: 5
+    max_trace_length: 5
+  Log05_structured:
+    playout_bound_B: 6
+    p95_trace_length: 3
+    max_trace_length: 3
+  Log06_semiStructured:
+    playout_bound_B: 14
+    p95_trace_length: 7
+    max_trace_length: 7
+  Log07_semiStructured:
+    playout_bound_B: 16
+    p95_trace_length: 8
+    max_trace_length: 8
+  Log08_looselyStructured:
+    playout_bound_B: 12
+    p95_trace_length: 6
+    max_trace_length: 6
+  Log09_unstructured:
+    playout_bound_B: 6
+    p95_trace_length: 3
+    max_trace_length: 3
+  Log10_semiStructured:
+    playout_bound_B: 14
+    p95_trace_length: 7
+    max_trace_length: 7
+  Log11_looselyStructured:
+    playout_bound_B: 12
+    p95_trace_length: 6
+    max_trace_length: 6
+  Log12_structured:
+    playout_bound_B: 12
+    p95_trace_length: 6
+    max_trace_length: 6
+  Log13_semiStructured:
+    playout_bound_B: 16
+    p95_trace_length: 8
+    max_trace_length: 8
+  Log14_looselyStructured_semiStructured:
+    playout_bound_B: 6
+    p95_trace_length: 3
+    max_trace_length: 3
+  Log15_structured:
+    playout_bound_B: 16
+    p95_trace_length: 8
+    max_trace_length: 8
+  Log16_looselyStructured:
+    playout_bound_B: 10
+    p95_trace_length: 5
+    max_trace_length: 5
+  Log17_semiStructured:
+    playout_bound_B: 18
+    p95_trace_length: 9
+    max_trace_length: 9
+  Log18_structured:
+    playout_bound_B: 10
+    p95_trace_length: 5
+    max_trace_length: 5
+  Log19_structured:
+    playout_bound_B: 8
+    p95_trace_length: 4
+    max_trace_length: 4
+  Log20_semiStructured:
+    playout_bound_B: 18
+    p95_trace_length: 9
+    max_trace_length: 9
+  Log21_looselyStructured:
+    playout_bound_B: 10
+    p95_trace_length: 5
+    max_trace_length: 5
+  Log22_looselyStructured:
+    playout_bound_B: 10
+    p95_trace_length: 5
+    max_trace_length: 5
+  Log23_unstructured:
+    playout_bound_B: 4
+    p95_trace_length: 2
+    max_trace_length: 2
+  Log24_unstructured:
+    playout_bound_B: 6
+    p95_trace_length: 3
+    max_trace_length: 3

@@ -1,0 +1,62 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "flex-compare"
+version = "0.1.0"
+description = "Structuredness-aware discovery playground — pick a log, classify it via ARM, add miners with their own configs, compare results side-by-side."
+readme = "README.md"
+requires-python = ">=3.11"
+license = {file = "LICENSE"}
+authors = [
+    {name = "Leon Beichter", email = "leon.beichter@icloud.com"},
+]
+keywords = ["process-mining", "discovery", "declarative", "imperative", "structuredness"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Scientific/Engineering :: Information Analysis",
+]
+dependencies = [
+    "dash>=3.0",  # need React 18 (default from Dash 3.0); Tab-3 pattern-matching callbacks fail to bind under Dash 2.x / React 16
+    "plotly>=5.20",
+    "pm4py>=2.7",
+    "pandas>=2.0",
+    "numpy>=1.26",
+    "lxml>=5.0",
+    "PyYAML>=6.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-cov>=5.0",
+]
+
+[project.scripts]
+flex-compare = "flex_compare.app:_cli"
+
+[project.urls]
+Repository = "https://github.com/INSM-TUM-Teaching/thesis_strucutredness_aware_miner_guidance"
+
+[tool.setuptools.packages.find]
+include = ["flex_compare*"]
+exclude = ["flex_compare.tests*"]
+
+[tool.setuptools.package-data]
+"flex_compare.fragebogen" = ["config/*.yaml"]
+"flex_compare.internal.shared" = ["*.yaml", "*.md"]
+"flex_compare.internal.declarative_miner" = ["assets/**/*"]
+"flex_compare.internal.fusion_miner" = ["java/**/*", "prom-lock.json"]
+
+[tool.pytest.ini_options]
+markers = [
+    "integration: end-to-end smoke tests that touch real tooling (skipped by default)",
+]
+addopts = "--import-mode=importlib"
+testpaths = ["flex_compare/tests"]

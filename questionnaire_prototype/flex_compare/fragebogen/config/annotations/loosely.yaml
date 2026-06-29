@@ -1,0 +1,47 @@
+# Segment annotations — Loosely-Structured logs.
+#
+# Hand-authored reference shown inside the matching E-item question card in the
+# Empirical wizard. Keyed by log stem (filename without .xes), then by E-item id
+# (E-L-BQ-1, E-L-BQ-2, E-L-IN-1, E-L-IN-2). An entry may carry 'segments' (name
+# + activities) and/or 'rules' (bullet-point strings). Anything not listed here
+# simply shows no hint.
+#
+# The 'rules' below are activity relationships (ARM-style: ordering and
+# co-occurrence/exclusion) that the model should reflect, derived from the trace
+# variants of the three loosely sample logs (Log03/08/11). They are an
+# orientation, not a ground truth or a hard constraint: ARM relations describe
+# how activities relate, not one correct model. Each holds with 100% trace
+# support; everything else is intentionally unordered/optional (loose).
+#
+# Each rule carries a 'strength' so an evaluator does not blur the tiers
+# (strongest first): direct (immediate succession, x right before y) >
+# presence (x in every trace) > exclusion (x and y never together) > eventual
+# (x somewhere before y, not necessarily adjacent). An eventual order must not
+# be read as if it were direct. The wizard sorts the bullets by this strength.
+
+Log03_looselyStructured:
+  E-L-BQ-1:
+    rules:
+      - {text: "d never together with b or c", strength: exclusion}
+      - {text: "f before c", strength: eventual}
+      - {text: "b before c", strength: eventual}
+      - "otherwise activities are largely unordered / optional"
+
+Log08_looselyStructured:
+  E-L-BQ-1:
+    rules:
+      - {text: "b directly before c", strength: direct}
+      - {text: "a starts every trace, before all other activities", strength: presence}
+      - {text: "b never together with d, e, or f", strength: exclusion}
+      - {text: "d before e", strength: eventual}
+      - {text: "c before f", strength: eventual}
+      - {text: "b before g", strength: eventual}
+      - "otherwise activities are largely unordered / optional"
+
+Log11_looselyStructured:
+  E-L-BQ-1:
+    rules:
+      - {text: "c before b", strength: eventual}
+      - {text: "f before d", strength: eventual}
+      - {text: "f before e", strength: eventual}
+      - "otherwise activities are largely unordered / optional"
