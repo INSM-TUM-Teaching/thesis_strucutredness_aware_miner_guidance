@@ -1,0 +1,5 @@
+{
+  "selected_log": "/path/to/Log01.xes",
+  "arm_thresholds": {"temporal": 1.0, "existential": 1.0},
+  "instances": []
+}

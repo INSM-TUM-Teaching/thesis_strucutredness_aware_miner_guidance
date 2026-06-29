@@ -1,0 +1,1359 @@
+{
+  "prom_version": "6.15",
+  "canonical_java_series": "11",
+  "java_runtime": "/opt/homebrew/opt/openjdk@11/bin/java",
+  "java_compiler": "/opt/homebrew/opt/openjdk@11/bin/javac",
+  "java_version_text": "openjdk version \"11.0.30\" 2026-01-20\nOpenJDK Runtime Environment Homebrew (build 11.0.30+0)\nOpenJDK 64-Bit Server VM Homebrew (build 11.0.30+0, mixed mode)",
+  "root_packages": [
+    "FusionMinerFul",
+    "DeclareMinerFul"
+  ],
+  "core_dist_packages": [
+    "ProM-Framework",
+    "ProM-Contexts",
+    "ProM-Models",
+    "ProM-Plugins"
+  ],
+  "vendor_archives_hydrated": true,
+  "vendor_archives_download_attempted": false,
+  "resolved_packages": [
+    {
+      "name": "AcceptingPetriNet",
+      "version": "6.11.196",
+      "url": "https://www.promtools.org/prom6/packages615/AcceptingPetriNet/AcceptingPetriNet-6.11.196-all.zip",
+      "dependencies": [
+        "Widgets",
+        "BasicUtils",
+        "PetriNets",
+        "ProM-Plugins"
+      ],
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/acceptingpetrinet-6.11.196"
+    },
+    {
+      "name": "Animation",
+      "version": "6.9.75",
+      "url": "https://www.promtools.org/prom6/packages615/Animation/Animation-6.9.75-all.zip",
+      "dependencies": [
+        "Widgets",
+        "BasicUtils",
+        "Log",
+        "ProM-Plugins"
+      ],
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/animation-6.9.75"
+    },
+    {
+      "name": "ApacheUtils",
+      "version": "6.13.4",
+      "url": "https://www.promtools.org/prom6/packages615/ApacheUtils/ApacheUtils-6.13.4-all.zip",
+      "dependencies": [
+        "ProM-Plugins"
+      ],
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/apacheutils-6.13.4"
+    },
+    {
+      "name": "BasicUtils",
+      "version": "6.12.1",
+      "url": "https://www.promtools.org/prom6/packages615/BasicUtils/BasicUtils-6.12.1-all.zip",
+      "dependencies": [
+        "ProM-Plugins"
+      ],
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/basicutils-6.12.1"
+    },
+    {
+      "name": "DeclareMinerFul",
+      "version": "6.9.76",
+      "url": "https://www.promtools.org/prom6/packages615/DeclareMinerFul/DeclareMinerFul-6.9.76-all.zip",
+      "dependencies": [
+        "DeclareVisualizer",
+        "Widgets",
+        "BasicUtils",
+        "DeclareMinerVisualizer",
+        "Log",
+        "ApacheUtils",
+        "XESLite",
+        "ProM-Plugins"
+      ],
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/declareminerful-6.9.76"
+    },
+    {
+      "name": "DeclareMinerVisualizer",
+      "version": "6.9.50",
+      "url": "https://www.promtools.org/prom6/packages615/DeclareMinerVisualizer/DeclareMinerVisualizer-6.9.50-all.zip",
+      "dependencies": [
+        "DeclareVisualizer",
+        "LTL2Automaton",
+        "Widgets",
+        "BasicUtils",
+        "Log",
+        "ProM-Plugins"
+      ],
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/declareminervisualizer-6.9.50"
+    },
+    {
+      "name": "DeclareVisualizer",
+      "version": "6.9.94",
+      "url": "https://www.promtools.org/prom6/packages615/DeclareVisualizer/DeclareVisualizer-6.9.94-all.zip",
+      "dependencies": [
+        "Widgets",
+        "BasicUtils",
+        "Log",
+        "ProM-Plugins"
+      ],
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/declarevisualizer-6.9.94"
+    },
+    {
+      "name": "EfficientStorage",
+      "version": "6.15.3",
+      "url": "https://www.promtools.org/prom6/packages615/EfficientStorage/EfficientStorage-6.15.3-all.zip",
+      "dependencies": [
+        "LpSolve",
+        "BasicUtils"
+      ],
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/efficientstorage-6.15.3"
+    },
+    {
+      "name": "Flex",
+      "version": "6.9.63",
+      "url": "https://www.promtools.org/prom6/packages615/Flex/Flex-6.9.63-all.zip",
+      "dependencies": [
+        "Widgets",
+        "Log",
+        "LogDialog",
+        "Performance",
+        "PetriNets",
+        "ProM-Plugins"
+      ],
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/flex-6.9.63"
+    },
+    {
+      "name": "FusionMinerFul",
+      "version": "6.12.2",
+      "url": "https://www.promtools.org/prom6/packages615/FusionMinerFul/FusionMinerFul-6.12.2-all.zip",
+      "dependencies": [
+        "JAXB",
+        "BasicUtils",
+        "Log",
+        "HeuristicsCNetMiner",
+        "ProM-Models",
+        "PetriNets",
+        "PNAnalysis",
+        "ProM-Plugins",
+        "InductiveMiner",
+        "MixedParadigm",
+        "Widgets",
+        "Flex",
+        "TransitionSystems"
+      ],
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/fusionminerful-6.12.2"
+    },
+    {
+      "name": "GPLv2Utils",
+      "version": "6.9.73",
+      "url": "https://www.promtools.org/prom6/packages615/GPLv2Utils/GPLv2Utils-6.9.73-all.zip",
+      "dependencies": [
+        "BasicUtils",
+        "Saxon",
+        "ApacheUtils",
+        "ProM-Plugins"
+      ],
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/gplv2utils-6.9.73"
+    },
+    {
+      "name": "GraphViz",
+      "version": "6.14.2",
+      "url": "https://www.promtools.org/prom6/packages615/GraphViz/GraphViz-6.14.2-all.zip",
+      "dependencies": [
+        "KitFox",
+        "Widgets",
+        "ApacheUtils",
+        "ProM-Plugins"
+      ],
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/graphviz-6.14.2"
+    },
+    {
+      "name": "GuideTreeMiner",
+      "version": "6.9.57",
+      "url": "https://www.promtools.org/prom6/packages615/GuideTreeMiner/GuideTreeMiner-6.9.57-all.zip",
+      "dependencies": [
+        "BasicUtils",
+        "Log",
+        "ProM-Plugins"
+      ],
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/guidetreeminer-6.9.57"
+    },
+    {
+      "name": "HeuristicsCNetMiner",
+      "version": "6.9.44",
+      "url": "https://www.promtools.org/prom6/packages615/HeuristicsCNetMiner/HeuristicsCNetMiner-6.9.44-all.zip",
+      "dependencies": [
+        "Widgets",
+        "BasicUtils",
+        "Log",
+        "HeuristicsMiner",
+        "Flex",
+        "PetriNets",
+        "ProM-Plugins"
+      ],
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/heuristicscnetminer-6.9.44"
+    },
+    {
+      "name": "HeuristicsMiner",
+      "version": "6.10.78",
+      "url": "https://www.promtools.org/prom6/packages615/HeuristicsMiner/HeuristicsMiner-6.10.78-all.zip",
+      "dependencies": [
+        "Widgets",
+        "Log",
+        "Flex",
+        "PetriNets",
+        "ProM-Plugins"
+      ],
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/heuristicsminer-6.10.78"
+    },
+    {
+      "name": "InductiveMiner",
+      "version": "6.14.5",
+      "url": "https://www.promtools.org/prom6/packages615/InductiveMiner/InductiveMiner-6.14.5-all.zip",
+      "dependencies": [
+        "PNetReplayer",
+        "Sat4j",
+        "GraphViz",
+        "JAXB",
+        "InductiveMinerDeprecated",
+        "ProcessTree",
+        "AcceptingPetriNet",
+        "Properties",
+        "PetriNets",
+        "ProM-Plugins",
+        "Murata"
+      ],
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/inductiveminer-6.14.5"
+    },
+    {
+      "name": "InductiveMinerDeprecated",
+      "version": "6.14.12",
+      "url": "https://www.promtools.org/prom6/packages615/InductiveMinerDeprecated/InductiveMinerDeprecated-6.14.12-all.zip",
+      "dependencies": [
+        "PNetReplayer",
+        "Sat4j",
+        "GraphViz",
+        "ProcessTree",
+        "AcceptingPetriNet",
+        "Properties",
+        "PetriNets",
+        "ProM-Plugins",
+        "Murata"
+      ],
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/inductiveminerdeprecated-6.14.12"
+    },
+    {
+      "name": "InteractiveVisualization",
+      "version": "6.9.57",
+      "url": "https://www.promtools.org/prom6/packages615/InteractiveVisualization/InteractiveVisualization-6.9.57-all.zip",
+      "dependencies": [
+        "Widgets",
+        "Log",
+        "ProM-Plugins"
+      ],
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/interactivevisualization-6.9.57"
+    },
+    {
+      "name": "JAXB",
+      "version": "6.9.6",
+      "url": "https://www.promtools.org/prom6/packages615/JAXB/JAXB-6.9.6-all.zip",
+      "dependencies": [
+        "ProM-Plugins"
+      ],
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/jaxb-6.9.6"
+    },
+    {
+      "name": "KitFox",
+      "version": "6.9.6",
+      "url": "https://www.promtools.org/prom6/packages615/KitFox/KitFox-6.9.6-all.zip",
+      "dependencies": [
+        "ApacheUtils",
+        "ProM-Plugins"
+      ],
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/kitfox-6.9.6"
+    },
+    {
+      "name": "LPEngine",
+      "version": "6.9.90",
+      "url": "https://www.promtools.org/prom6/packages615/LPEngine/LPEngine-6.9.90-all.zip",
+      "dependencies": [
+        "Widgets",
+        "BasicUtils",
+        "LpSolve",
+        "Log",
+        "ProM-Plugins"
+      ],
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/lpengine-6.9.90"
+    },
+    {
+      "name": "LTL2Automaton",
+      "version": "6.9.86",
+      "url": "https://www.promtools.org/prom6/packages615/LTL2Automaton/LTL2Automaton-6.9.86-all.zip",
+      "dependencies": [
+        "BasicUtils",
+        "ProM-Plugins"
+      ],
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/ltl2automaton-6.9.86"
+    },
+    {
+      "name": "Log",
+      "version": "6.14.3",
+      "url": "https://www.promtools.org/prom6/packages615/Log/Log-6.14.3-all.zip",
+      "dependencies": [
+        "OpenXES",
+        "Widgets",
+        "BasicUtils",
+        "Saxon",
+        "ApacheUtils",
+        "ProM-Plugins"
+      ],
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/log-6.14.3"
+    },
+    {
+      "name": "LogDialog",
+      "version": "6.12.3",
+      "url": "https://www.promtools.org/prom6/packages615/LogDialog/LogDialog-6.12.3-all.zip",
+      "dependencies": [
+        "InteractiveVisualization",
+        "Log",
+        "ProM-Plugins"
+      ],
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/logdialog-6.12.3"
+    },
+    {
+      "name": "LpSolve",
+      "version": "5.5.4",
+      "url": "http://www.promtools.org/prom6/packages67/LpSolve/LpSolve_5.5.0.15_mac.zip",
+      "dependencies": [],
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/lpsolve-5.5.4"
+    },
+    {
+      "name": "MixedParadigm",
+      "version": "6.9.39",
+      "url": "https://www.promtools.org/prom6/packages615/MixedParadigm/MixedParadigm-6.9.39-all.zip",
+      "dependencies": [
+        "EfficientStorage",
+        "GPLv2Utils",
+        "Widgets",
+        "PNetReplayer",
+        "BasicUtils",
+        "LpSolve",
+        "PNetAlignmentAnalysis",
+        "DeclareMinerFul",
+        "PetriNets",
+        "ProM-Plugins"
+      ],
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/mixedparadigm-6.9.39"
+    },
+    {
+      "name": "Murata",
+      "version": "6.14.3",
+      "url": "https://www.promtools.org/prom6/packages615/Murata/Murata-6.14.3-all.zip",
+      "dependencies": [
+        "BasicUtils",
+        "PetriNets",
+        "LPEngine",
+        "ProM-Plugins"
+      ],
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/murata-6.14.3"
+    },
+    {
+      "name": "OSService",
+      "version": "6.9.57",
+      "url": "https://www.promtools.org/prom6/packages615/OSService/OSService-6.9.57-all.zip",
+      "dependencies": [
+        "Log",
+        "ProM-Plugins"
+      ],
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/osservice-6.9.57"
+    },
+    {
+      "name": "OpenXES",
+      "version": "6.14.7",
+      "url": "https://www.promtools.org/prom6/packages615/OpenXES/OpenXES-6.14.7-all.zip",
+      "dependencies": [
+        "JAXB",
+        "BasicUtils",
+        "ApacheUtils",
+        "ProM-Plugins"
+      ],
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/openxes-6.14.7"
+    },
+    {
+      "name": "PNAnalysis",
+      "version": "6.13.1",
+      "url": "https://www.promtools.org/prom6/packages615/PNAnalysis/PNAnalysis-6.13.1-all.zip",
+      "dependencies": [
+        "PetriNets",
+        "TransitionSystems",
+        "ProM-Plugins"
+      ],
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/pnanalysis-6.13.1"
+    },
+    {
+      "name": "PNetAlignmentAnalysis",
+      "version": "6.10.114",
+      "url": "https://www.promtools.org/prom6/packages615/PNetAlignmentAnalysis/PNetAlignmentAnalysis-6.10.114-all.zip",
+      "dependencies": [
+        "EfficientStorage",
+        "PNetReplayer",
+        "Widgets",
+        "BasicUtils",
+        "Log",
+        "TraceAlignmentWithGuideTree",
+        "GuideTreeMiner",
+        "PetriNets",
+        "ProM-Plugins"
+      ],
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/pnetalignmentanalysis-6.10.114"
+    },
+    {
+      "name": "PNetReplayer",
+      "version": "6.11.191",
+      "url": "https://www.promtools.org/prom6/packages615/PNetReplayer/PNetReplayer-6.11.191-all.zip",
+      "dependencies": [
+        "EfficientStorage",
+        "Widgets",
+        "BasicUtils",
+        "Log",
+        "LpSolve",
+        "LogDialog",
+        "PetriNets",
+        "ProM-Plugins"
+      ],
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/pnetreplayer-6.11.191"
+    },
+    {
+      "name": "Performance",
+      "version": "6.9.59",
+      "url": "https://www.promtools.org/prom6/packages615/Performance/Performance-6.9.59-all.zip",
+      "dependencies": [
+        "Widgets",
+        "Log",
+        "ProM-Plugins"
+      ],
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/performance-6.9.59"
+    },
+    {
+      "name": "PetriNets",
+      "version": "6.12.2",
+      "url": "https://www.promtools.org/prom6/packages615/PetriNets/PetriNets-6.12.2-all.zip",
+      "dependencies": [
+        "Widgets",
+        "Log",
+        "ApacheUtils",
+        "TransitionSystems",
+        "ProM-Plugins"
+      ],
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/petrinets-6.12.2"
+    },
+    {
+      "name": "ProM-Contexts",
+      "version": "6.14.14",
+      "url": "https://www.promtools.org/prom6/packages615/ProM-Contexts/ProM-Contexts-6.14.14-all.zip",
+      "dependencies": [
+        "ProM-Framework"
+      ],
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/prom-contexts-6.14.14"
+    },
+    {
+      "name": "ProM-Framework",
+      "version": "6.14.45",
+      "url": "https://www.promtools.org/prom6/packages615/ProM-Framework/ProM-Framework-6.14.45-all.zip",
+      "dependencies": [],
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/prom-framework-6.14.45"
+    },
+    {
+      "name": "ProM-Models",
+      "version": "6.14.14",
+      "url": "https://www.promtools.org/prom6/packages615/ProM-Models/ProM-Models-6.14.14-all.zip",
+      "dependencies": [
+        "ProM-Framework"
+      ],
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/prom-models-6.14.14"
+    },
+    {
+      "name": "ProM-Plugins",
+      "version": "6.14.7",
+      "url": "https://www.promtools.org/prom6/packages615/ProM-Plugins/ProM-Plugins-6.14.7-all.zip",
+      "dependencies": [
+        "ProM-Models",
+        "ProM-Contexts"
+      ],
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/prom-plugins-6.14.7"
+    },
+    {
+      "name": "ProcessTree",
+      "version": "6.9.98",
+      "url": "https://www.promtools.org/prom6/packages615/ProcessTree/ProcessTree-6.9.98-all.zip",
+      "dependencies": [
+        "YAWL",
+        "BasicUtils",
+        "Log",
+        "LpSolve",
+        "Properties",
+        "PetriNets",
+        "ProM-Plugins"
+      ],
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/processtree-6.9.98"
+    },
+    {
+      "name": "Properties",
+      "version": "6.9.106",
+      "url": "https://www.promtools.org/prom6/packages615/Properties/Properties-6.9.106-all.zip",
+      "dependencies": [
+        "ApacheUtils",
+        "ProM-Plugins"
+      ],
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/properties-6.9.106"
+    },
+    {
+      "name": "Sat4j",
+      "version": "6.9.7",
+      "url": "https://www.promtools.org/prom6/packages615/Sat4j/Sat4j-6.9.7-all.zip",
+      "dependencies": [
+        "ProM-Plugins"
+      ],
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/sat4j-6.9.7"
+    },
+    {
+      "name": "Saxon",
+      "version": "6.9.69",
+      "url": "https://www.promtools.org/prom6/packages615/Saxon/Saxon-6.9.69-all.zip",
+      "dependencies": [
+        "ProM-Plugins"
+      ],
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/saxon-6.9.69"
+    },
+    {
+      "name": "TraceAlignmentWithGuideTree",
+      "version": "6.9.63",
+      "url": "https://www.promtools.org/prom6/packages615/TraceAlignmentWithGuideTree/TraceAlignmentWithGuideTree-6.9.63-all.zip",
+      "dependencies": [
+        "Log",
+        "GuideTreeMiner",
+        "ProM-Plugins"
+      ],
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/tracealignmentwithguidetree-6.9.63"
+    },
+    {
+      "name": "TransitionSystems",
+      "version": "6.12.1",
+      "url": "https://www.promtools.org/prom6/packages615/TransitionSystems/TransitionSystems-6.12.1-all.zip",
+      "dependencies": [
+        "Widgets",
+        "BasicUtils",
+        "Log",
+        "Animation",
+        "OSService",
+        "ProM-Plugins"
+      ],
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/transitionsystems-6.12.1"
+    },
+    {
+      "name": "Widgets",
+      "version": "6.12.2",
+      "url": "https://www.promtools.org/prom6/packages615/Widgets/Widgets-6.12.2-all.zip",
+      "dependencies": [
+        "ProM-Plugins"
+      ],
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/widgets-6.12.2"
+    },
+    {
+      "name": "XESLite",
+      "version": "6.9.338",
+      "url": "https://www.promtools.org/prom6/packages615/XESLite/XESLite-6.9.338-all.zip",
+      "dependencies": [
+        "GraphViz",
+        "BasicUtils",
+        "Log",
+        "ApacheUtils",
+        "ProM-Plugins"
+      ],
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/xeslite-6.9.338"
+    },
+    {
+      "name": "YAWL",
+      "version": "6.9.64",
+      "url": "https://www.promtools.org/prom6/packages615/YAWL/YAWL-6.9.64-all.zip",
+      "dependencies": [
+        "Widgets",
+        "Log",
+        "Performance",
+        "ProM-Plugins"
+      ],
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/yawl-6.9.64"
+    }
+  ],
+  "vendor_packages": [
+    {
+      "name": "AcceptingPetriNet",
+      "version": "6.11.196",
+      "url": "https://www.promtools.org/prom6/packages615/AcceptingPetriNet/AcceptingPetriNet-6.11.196-all.zip",
+      "archive_path": "/Users/leonbei/BachelorThesis/flex_compare/flex_compare/internal/fusion_miner/vendor/prom-packages/AcceptingPetriNet-6.11.196-all.zip",
+      "archive_exists": true,
+      "archive_downloaded_now": false,
+      "archive_sha256": "111b8f4df3fd80136c7630a42b6644f07a1e02794e1007e22da477a611380709",
+      "archive_error": null,
+      "archive_expected_but_missing": false,
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/acceptingpetrinet-6.11.196"
+    },
+    {
+      "name": "Animation",
+      "version": "6.9.75",
+      "url": "https://www.promtools.org/prom6/packages615/Animation/Animation-6.9.75-all.zip",
+      "archive_path": "/Users/leonbei/BachelorThesis/flex_compare/flex_compare/internal/fusion_miner/vendor/prom-packages/Animation-6.9.75-all.zip",
+      "archive_exists": true,
+      "archive_downloaded_now": false,
+      "archive_sha256": "f309e1e62a6075155d7f49a36f4153cd6204f4209d97f9915f12ed5b4323d43e",
+      "archive_error": null,
+      "archive_expected_but_missing": false,
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/animation-6.9.75"
+    },
+    {
+      "name": "ApacheUtils",
+      "version": "6.13.4",
+      "url": "https://www.promtools.org/prom6/packages615/ApacheUtils/ApacheUtils-6.13.4-all.zip",
+      "archive_path": "/Users/leonbei/BachelorThesis/flex_compare/flex_compare/internal/fusion_miner/vendor/prom-packages/ApacheUtils-6.13.4-all.zip",
+      "archive_exists": true,
+      "archive_downloaded_now": false,
+      "archive_sha256": "2a8a9b48c911ed7bd5e51db4e58098ac566f8de9bd833dcf57646d096d54f2ef",
+      "archive_error": null,
+      "archive_expected_but_missing": false,
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/apacheutils-6.13.4"
+    },
+    {
+      "name": "BasicUtils",
+      "version": "6.12.1",
+      "url": "https://www.promtools.org/prom6/packages615/BasicUtils/BasicUtils-6.12.1-all.zip",
+      "archive_path": "/Users/leonbei/BachelorThesis/flex_compare/flex_compare/internal/fusion_miner/vendor/prom-packages/BasicUtils-6.12.1-all.zip",
+      "archive_exists": true,
+      "archive_downloaded_now": false,
+      "archive_sha256": "a3f19040096cdc0fa4db81fddafb735f0f721865bd3ed7d21a2d0015c44e03e6",
+      "archive_error": null,
+      "archive_expected_but_missing": false,
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/basicutils-6.12.1"
+    },
+    {
+      "name": "DeclareMinerFul",
+      "version": "6.9.76",
+      "url": "https://www.promtools.org/prom6/packages615/DeclareMinerFul/DeclareMinerFul-6.9.76-all.zip",
+      "archive_path": "/Users/leonbei/BachelorThesis/flex_compare/flex_compare/internal/fusion_miner/vendor/prom-packages/DeclareMinerFul-6.9.76-all.zip",
+      "archive_exists": true,
+      "archive_downloaded_now": false,
+      "archive_sha256": "1fde21b62637ab400b7330a9a402896276293692d9d0737879dbb55c1ff13e3e",
+      "archive_error": null,
+      "archive_expected_but_missing": false,
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/declareminerful-6.9.76"
+    },
+    {
+      "name": "DeclareMinerVisualizer",
+      "version": "6.9.50",
+      "url": "https://www.promtools.org/prom6/packages615/DeclareMinerVisualizer/DeclareMinerVisualizer-6.9.50-all.zip",
+      "archive_path": "/Users/leonbei/BachelorThesis/flex_compare/flex_compare/internal/fusion_miner/vendor/prom-packages/DeclareMinerVisualizer-6.9.50-all.zip",
+      "archive_exists": true,
+      "archive_downloaded_now": false,
+      "archive_sha256": "48449405b61202975a0bbbd9f46402b7d477cd6a8f71ce126946f5051f553300",
+      "archive_error": null,
+      "archive_expected_but_missing": false,
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/declareminervisualizer-6.9.50"
+    },
+    {
+      "name": "DeclareVisualizer",
+      "version": "6.9.94",
+      "url": "https://www.promtools.org/prom6/packages615/DeclareVisualizer/DeclareVisualizer-6.9.94-all.zip",
+      "archive_path": "/Users/leonbei/BachelorThesis/flex_compare/flex_compare/internal/fusion_miner/vendor/prom-packages/DeclareVisualizer-6.9.94-all.zip",
+      "archive_exists": true,
+      "archive_downloaded_now": false,
+      "archive_sha256": "4474a99bf74332a6608f9d548f8993c28c85ccfa8225b9bf280287e43c4dd02d",
+      "archive_error": null,
+      "archive_expected_but_missing": false,
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/declarevisualizer-6.9.94"
+    },
+    {
+      "name": "EfficientStorage",
+      "version": "6.15.3",
+      "url": "https://www.promtools.org/prom6/packages615/EfficientStorage/EfficientStorage-6.15.3-all.zip",
+      "archive_path": "/Users/leonbei/BachelorThesis/flex_compare/flex_compare/internal/fusion_miner/vendor/prom-packages/EfficientStorage-6.15.3-all.zip",
+      "archive_exists": true,
+      "archive_downloaded_now": false,
+      "archive_sha256": "bf937da09a2779d7855483e39958652b2d47ed1d0b924d4816eced6fff7df425",
+      "archive_error": null,
+      "archive_expected_but_missing": false,
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/efficientstorage-6.15.3"
+    },
+    {
+      "name": "Flex",
+      "version": "6.9.63",
+      "url": "https://www.promtools.org/prom6/packages615/Flex/Flex-6.9.63-all.zip",
+      "archive_path": "/Users/leonbei/BachelorThesis/flex_compare/flex_compare/internal/fusion_miner/vendor/prom-packages/Flex-6.9.63-all.zip",
+      "archive_exists": true,
+      "archive_downloaded_now": false,
+      "archive_sha256": "ef14ddf0bb2fe8f43a8beac252ea8f6d0eafb088d7952235a5b5690d0cfc30f9",
+      "archive_error": null,
+      "archive_expected_but_missing": false,
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/flex-6.9.63"
+    },
+    {
+      "name": "FusionMinerFul",
+      "version": "6.12.2",
+      "url": "https://www.promtools.org/prom6/packages615/FusionMinerFul/FusionMinerFul-6.12.2-all.zip",
+      "archive_path": "/Users/leonbei/BachelorThesis/flex_compare/flex_compare/internal/fusion_miner/vendor/prom-packages/FusionMinerFul-6.12.2-all.zip",
+      "archive_exists": true,
+      "archive_downloaded_now": false,
+      "archive_sha256": "72bc1567c0403bf9750d5f5e177d700569b411335e4e34b5197feb31966bdc70",
+      "archive_error": null,
+      "archive_expected_but_missing": false,
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/fusionminerful-6.12.2"
+    },
+    {
+      "name": "GPLv2Utils",
+      "version": "6.9.73",
+      "url": "https://www.promtools.org/prom6/packages615/GPLv2Utils/GPLv2Utils-6.9.73-all.zip",
+      "archive_path": "/Users/leonbei/BachelorThesis/flex_compare/flex_compare/internal/fusion_miner/vendor/prom-packages/GPLv2Utils-6.9.73-all.zip",
+      "archive_exists": true,
+      "archive_downloaded_now": false,
+      "archive_sha256": "865ce5dfe78b42ff912d9c54ca3fde1b110f397f98dbb42f105f20e44086188b",
+      "archive_error": null,
+      "archive_expected_but_missing": false,
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/gplv2utils-6.9.73"
+    },
+    {
+      "name": "GraphViz",
+      "version": "6.14.2",
+      "url": "https://www.promtools.org/prom6/packages615/GraphViz/GraphViz-6.14.2-all.zip",
+      "archive_path": "/Users/leonbei/BachelorThesis/flex_compare/flex_compare/internal/fusion_miner/vendor/prom-packages/GraphViz-6.14.2-all.zip",
+      "archive_exists": true,
+      "archive_downloaded_now": false,
+      "archive_sha256": "6bdd1c9020e6a10bf1182b55f90673d704ee7dcbbd3fed64b364a56844f47f2f",
+      "archive_error": null,
+      "archive_expected_but_missing": false,
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/graphviz-6.14.2"
+    },
+    {
+      "name": "GuideTreeMiner",
+      "version": "6.9.57",
+      "url": "https://www.promtools.org/prom6/packages615/GuideTreeMiner/GuideTreeMiner-6.9.57-all.zip",
+      "archive_path": "/Users/leonbei/BachelorThesis/flex_compare/flex_compare/internal/fusion_miner/vendor/prom-packages/GuideTreeMiner-6.9.57-all.zip",
+      "archive_exists": true,
+      "archive_downloaded_now": false,
+      "archive_sha256": "068424516440fad5e0e0492ff31cdb0aad1759990be7da4f00dc52adbffcd1d1",
+      "archive_error": null,
+      "archive_expected_but_missing": false,
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/guidetreeminer-6.9.57"
+    },
+    {
+      "name": "HeuristicsCNetMiner",
+      "version": "6.9.44",
+      "url": "https://www.promtools.org/prom6/packages615/HeuristicsCNetMiner/HeuristicsCNetMiner-6.9.44-all.zip",
+      "archive_path": "/Users/leonbei/BachelorThesis/flex_compare/flex_compare/internal/fusion_miner/vendor/prom-packages/HeuristicsCNetMiner-6.9.44-all.zip",
+      "archive_exists": true,
+      "archive_downloaded_now": false,
+      "archive_sha256": "bc5fd46fec1324c67ab955eec87e907c2b8f13173fd42014dfe69fac23c48bb7",
+      "archive_error": null,
+      "archive_expected_but_missing": false,
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/heuristicscnetminer-6.9.44"
+    },
+    {
+      "name": "HeuristicsMiner",
+      "version": "6.10.78",
+      "url": "https://www.promtools.org/prom6/packages615/HeuristicsMiner/HeuristicsMiner-6.10.78-all.zip",
+      "archive_path": "/Users/leonbei/BachelorThesis/flex_compare/flex_compare/internal/fusion_miner/vendor/prom-packages/HeuristicsMiner-6.10.78-all.zip",
+      "archive_exists": true,
+      "archive_downloaded_now": false,
+      "archive_sha256": "2ab6fac905e087b9c1932d51912556e0f18acd48d45133b49dce7859f44af41f",
+      "archive_error": null,
+      "archive_expected_but_missing": false,
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/heuristicsminer-6.10.78"
+    },
+    {
+      "name": "InductiveMiner",
+      "version": "6.14.5",
+      "url": "https://www.promtools.org/prom6/packages615/InductiveMiner/InductiveMiner-6.14.5-all.zip",
+      "archive_path": "/Users/leonbei/BachelorThesis/flex_compare/flex_compare/internal/fusion_miner/vendor/prom-packages/InductiveMiner-6.14.5-all.zip",
+      "archive_exists": true,
+      "archive_downloaded_now": false,
+      "archive_sha256": "44a558cd5ce42c2bedfc33fbae07432e86647572b5fa97762f2b4146139dca0f",
+      "archive_error": null,
+      "archive_expected_but_missing": false,
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/inductiveminer-6.14.5"
+    },
+    {
+      "name": "InductiveMinerDeprecated",
+      "version": "6.14.12",
+      "url": "https://www.promtools.org/prom6/packages615/InductiveMinerDeprecated/InductiveMinerDeprecated-6.14.12-all.zip",
+      "archive_path": "/Users/leonbei/BachelorThesis/flex_compare/flex_compare/internal/fusion_miner/vendor/prom-packages/InductiveMinerDeprecated-6.14.12-all.zip",
+      "archive_exists": true,
+      "archive_downloaded_now": false,
+      "archive_sha256": "4893b074054e1360264468acdf5efbe90e4c131aeb96b46e4e45961706848533",
+      "archive_error": null,
+      "archive_expected_but_missing": false,
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/inductiveminerdeprecated-6.14.12"
+    },
+    {
+      "name": "InteractiveVisualization",
+      "version": "6.9.57",
+      "url": "https://www.promtools.org/prom6/packages615/InteractiveVisualization/InteractiveVisualization-6.9.57-all.zip",
+      "archive_path": "/Users/leonbei/BachelorThesis/flex_compare/flex_compare/internal/fusion_miner/vendor/prom-packages/InteractiveVisualization-6.9.57-all.zip",
+      "archive_exists": true,
+      "archive_downloaded_now": false,
+      "archive_sha256": "844cd5933c7af6aee43c39a094556f241163b514401e3bfafc14326f8279557a",
+      "archive_error": null,
+      "archive_expected_but_missing": false,
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/interactivevisualization-6.9.57"
+    },
+    {
+      "name": "JAXB",
+      "version": "6.9.6",
+      "url": "https://www.promtools.org/prom6/packages615/JAXB/JAXB-6.9.6-all.zip",
+      "archive_path": "/Users/leonbei/BachelorThesis/flex_compare/flex_compare/internal/fusion_miner/vendor/prom-packages/JAXB-6.9.6-all.zip",
+      "archive_exists": true,
+      "archive_downloaded_now": false,
+      "archive_sha256": "015601ff683dedd1ca276956b315f3be7a259ba01a5ab01fa7eb1b586f832059",
+      "archive_error": null,
+      "archive_expected_but_missing": false,
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/jaxb-6.9.6"
+    },
+    {
+      "name": "KitFox",
+      "version": "6.9.6",
+      "url": "https://www.promtools.org/prom6/packages615/KitFox/KitFox-6.9.6-all.zip",
+      "archive_path": "/Users/leonbei/BachelorThesis/flex_compare/flex_compare/internal/fusion_miner/vendor/prom-packages/KitFox-6.9.6-all.zip",
+      "archive_exists": true,
+      "archive_downloaded_now": false,
+      "archive_sha256": "c3739e5d3384bd1338e07112a52be58819d26a84b1de1ce3c7311b7f5f53a4c7",
+      "archive_error": null,
+      "archive_expected_but_missing": false,
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/kitfox-6.9.6"
+    },
+    {
+      "name": "LPEngine",
+      "version": "6.9.90",
+      "url": "https://www.promtools.org/prom6/packages615/LPEngine/LPEngine-6.9.90-all.zip",
+      "archive_path": "/Users/leonbei/BachelorThesis/flex_compare/flex_compare/internal/fusion_miner/vendor/prom-packages/LPEngine-6.9.90-all.zip",
+      "archive_exists": true,
+      "archive_downloaded_now": false,
+      "archive_sha256": "fea437d3e6b58d15045a22550a18818d93bb5be98db0ba8c971f0f76b2fa9298",
+      "archive_error": null,
+      "archive_expected_but_missing": false,
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/lpengine-6.9.90"
+    },
+    {
+      "name": "LTL2Automaton",
+      "version": "6.9.86",
+      "url": "https://www.promtools.org/prom6/packages615/LTL2Automaton/LTL2Automaton-6.9.86-all.zip",
+      "archive_path": "/Users/leonbei/BachelorThesis/flex_compare/flex_compare/internal/fusion_miner/vendor/prom-packages/LTL2Automaton-6.9.86-all.zip",
+      "archive_exists": true,
+      "archive_downloaded_now": false,
+      "archive_sha256": "52c0403f85f7d2c44bd26837f1961ecf759ca4ed92db7f0bd2fb7ed2f6b0d70f",
+      "archive_error": null,
+      "archive_expected_but_missing": false,
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/ltl2automaton-6.9.86"
+    },
+    {
+      "name": "Log",
+      "version": "6.14.3",
+      "url": "https://www.promtools.org/prom6/packages615/Log/Log-6.14.3-all.zip",
+      "archive_path": "/Users/leonbei/BachelorThesis/flex_compare/flex_compare/internal/fusion_miner/vendor/prom-packages/Log-6.14.3-all.zip",
+      "archive_exists": true,
+      "archive_downloaded_now": false,
+      "archive_sha256": "a63ed43f3940a8f464b31e1782e9d31e49244a746635bb24e099d4b75d2c795e",
+      "archive_error": null,
+      "archive_expected_but_missing": false,
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/log-6.14.3"
+    },
+    {
+      "name": "LogDialog",
+      "version": "6.12.3",
+      "url": "https://www.promtools.org/prom6/packages615/LogDialog/LogDialog-6.12.3-all.zip",
+      "archive_path": "/Users/leonbei/BachelorThesis/flex_compare/flex_compare/internal/fusion_miner/vendor/prom-packages/LogDialog-6.12.3-all.zip",
+      "archive_exists": true,
+      "archive_downloaded_now": false,
+      "archive_sha256": "6d0e86691ef64ba1d9da2b894b0db0e7f58e456ee07e83a2c8bc9409420a417c",
+      "archive_error": null,
+      "archive_expected_but_missing": false,
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/logdialog-6.12.3"
+    },
+    {
+      "name": "LpSolve",
+      "version": "5.5.4",
+      "url": "http://www.promtools.org/prom6/packages67/LpSolve/LpSolve_5.5.0.15_mac.zip",
+      "archive_path": "/Users/leonbei/BachelorThesis/flex_compare/flex_compare/internal/fusion_miner/vendor/prom-packages/LpSolve_5.5.0.15_mac.zip",
+      "archive_exists": true,
+      "archive_downloaded_now": false,
+      "archive_sha256": "bf214f1c05a487fa465351672761802a68295901b24a4410b4170144499cd421",
+      "archive_error": null,
+      "archive_expected_but_missing": false,
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/lpsolve-5.5.4"
+    },
+    {
+      "name": "MixedParadigm",
+      "version": "6.9.39",
+      "url": "https://www.promtools.org/prom6/packages615/MixedParadigm/MixedParadigm-6.9.39-all.zip",
+      "archive_path": "/Users/leonbei/BachelorThesis/flex_compare/flex_compare/internal/fusion_miner/vendor/prom-packages/MixedParadigm-6.9.39-all.zip",
+      "archive_exists": true,
+      "archive_downloaded_now": false,
+      "archive_sha256": "15c393e285777e313828447ce5b11c95cea6264f2a9028759c1863c0bb582e33",
+      "archive_error": null,
+      "archive_expected_but_missing": false,
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/mixedparadigm-6.9.39"
+    },
+    {
+      "name": "Murata",
+      "version": "6.14.3",
+      "url": "https://www.promtools.org/prom6/packages615/Murata/Murata-6.14.3-all.zip",
+      "archive_path": "/Users/leonbei/BachelorThesis/flex_compare/flex_compare/internal/fusion_miner/vendor/prom-packages/Murata-6.14.3-all.zip",
+      "archive_exists": true,
+      "archive_downloaded_now": false,
+      "archive_sha256": "96d325e97a1fe47000c4ef7a9350fdc27036ba8e9994f1639b6a83611a871282",
+      "archive_error": null,
+      "archive_expected_but_missing": false,
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/murata-6.14.3"
+    },
+    {
+      "name": "OSService",
+      "version": "6.9.57",
+      "url": "https://www.promtools.org/prom6/packages615/OSService/OSService-6.9.57-all.zip",
+      "archive_path": "/Users/leonbei/BachelorThesis/flex_compare/flex_compare/internal/fusion_miner/vendor/prom-packages/OSService-6.9.57-all.zip",
+      "archive_exists": true,
+      "archive_downloaded_now": false,
+      "archive_sha256": "f428771870ae78f0ad7c63f6ac682304ebb3aa21dd4ea4620350bd5caf992a3b",
+      "archive_error": null,
+      "archive_expected_but_missing": false,
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/osservice-6.9.57"
+    },
+    {
+      "name": "OpenXES",
+      "version": "6.14.7",
+      "url": "https://www.promtools.org/prom6/packages615/OpenXES/OpenXES-6.14.7-all.zip",
+      "archive_path": "/Users/leonbei/BachelorThesis/flex_compare/flex_compare/internal/fusion_miner/vendor/prom-packages/OpenXES-6.14.7-all.zip",
+      "archive_exists": true,
+      "archive_downloaded_now": false,
+      "archive_sha256": "ba0cd2de880ad816f09d121a1ddf24246b79e92e649e6e86331ea71fc243b67a",
+      "archive_error": null,
+      "archive_expected_but_missing": false,
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/openxes-6.14.7"
+    },
+    {
+      "name": "PNAnalysis",
+      "version": "6.13.1",
+      "url": "https://www.promtools.org/prom6/packages615/PNAnalysis/PNAnalysis-6.13.1-all.zip",
+      "archive_path": "/Users/leonbei/BachelorThesis/flex_compare/flex_compare/internal/fusion_miner/vendor/prom-packages/PNAnalysis-6.13.1-all.zip",
+      "archive_exists": true,
+      "archive_downloaded_now": false,
+      "archive_sha256": "b25115072c823168ef7f0a708f262d6a4335f98c2bf49af974dd15ced25b166d",
+      "archive_error": null,
+      "archive_expected_but_missing": false,
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/pnanalysis-6.13.1"
+    },
+    {
+      "name": "PNetAlignmentAnalysis",
+      "version": "6.10.114",
+      "url": "https://www.promtools.org/prom6/packages615/PNetAlignmentAnalysis/PNetAlignmentAnalysis-6.10.114-all.zip",
+      "archive_path": "/Users/leonbei/BachelorThesis/flex_compare/flex_compare/internal/fusion_miner/vendor/prom-packages/PNetAlignmentAnalysis-6.10.114-all.zip",
+      "archive_exists": true,
+      "archive_downloaded_now": false,
+      "archive_sha256": "b8bae95abbdb98df5a0ce39779c9dad7cb840b5db9989b3d1e19e5386372e4c6",
+      "archive_error": null,
+      "archive_expected_but_missing": false,
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/pnetalignmentanalysis-6.10.114"
+    },
+    {
+      "name": "PNetReplayer",
+      "version": "6.11.191",
+      "url": "https://www.promtools.org/prom6/packages615/PNetReplayer/PNetReplayer-6.11.191-all.zip",
+      "archive_path": "/Users/leonbei/BachelorThesis/flex_compare/flex_compare/internal/fusion_miner/vendor/prom-packages/PNetReplayer-6.11.191-all.zip",
+      "archive_exists": true,
+      "archive_downloaded_now": false,
+      "archive_sha256": "09dde782b07ebdafa6b17d44f774aa1375737e30e490d914741dbf75d5aadf29",
+      "archive_error": null,
+      "archive_expected_but_missing": false,
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/pnetreplayer-6.11.191"
+    },
+    {
+      "name": "Performance",
+      "version": "6.9.59",
+      "url": "https://www.promtools.org/prom6/packages615/Performance/Performance-6.9.59-all.zip",
+      "archive_path": "/Users/leonbei/BachelorThesis/flex_compare/flex_compare/internal/fusion_miner/vendor/prom-packages/Performance-6.9.59-all.zip",
+      "archive_exists": true,
+      "archive_downloaded_now": false,
+      "archive_sha256": "e1ebf9ac799a652136cffb924bc9b101b554fa77f3cde7d3e2d999594883503d",
+      "archive_error": null,
+      "archive_expected_but_missing": false,
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/performance-6.9.59"
+    },
+    {
+      "name": "PetriNets",
+      "version": "6.12.2",
+      "url": "https://www.promtools.org/prom6/packages615/PetriNets/PetriNets-6.12.2-all.zip",
+      "archive_path": "/Users/leonbei/BachelorThesis/flex_compare/flex_compare/internal/fusion_miner/vendor/prom-packages/PetriNets-6.12.2-all.zip",
+      "archive_exists": true,
+      "archive_downloaded_now": false,
+      "archive_sha256": "1ec82425acacc81874ae5eee82b9d37967c57a0ef0259fabac4b777f7e6f24b3",
+      "archive_error": null,
+      "archive_expected_but_missing": false,
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/petrinets-6.12.2"
+    },
+    {
+      "name": "ProM-Contexts",
+      "version": "6.14.14",
+      "url": "https://www.promtools.org/prom6/packages615/ProM-Contexts/ProM-Contexts-6.14.14-all.zip",
+      "archive_path": "/Users/leonbei/BachelorThesis/flex_compare/flex_compare/internal/fusion_miner/vendor/prom-packages/ProM-Contexts-6.14.14-all.zip",
+      "archive_exists": true,
+      "archive_downloaded_now": false,
+      "archive_sha256": "535ec3bb73d2650bbda805562cb6552b862df91bc5eadc7d1ce42e8ebf76952b",
+      "archive_error": null,
+      "archive_expected_but_missing": false,
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/prom-contexts-6.14.14"
+    },
+    {
+      "name": "ProM-Framework",
+      "version": "6.14.45",
+      "url": "https://www.promtools.org/prom6/packages615/ProM-Framework/ProM-Framework-6.14.45-all.zip",
+      "archive_path": "/Users/leonbei/BachelorThesis/flex_compare/flex_compare/internal/fusion_miner/vendor/prom-packages/ProM-Framework-6.14.45-all.zip",
+      "archive_exists": true,
+      "archive_downloaded_now": false,
+      "archive_sha256": "3d4932f7a54c6384d5b58273df9fbb6c3c2cb400c4a9fe31d04331eef43f8885",
+      "archive_error": null,
+      "archive_expected_but_missing": false,
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/prom-framework-6.14.45"
+    },
+    {
+      "name": "ProM-Models",
+      "version": "6.14.14",
+      "url": "https://www.promtools.org/prom6/packages615/ProM-Models/ProM-Models-6.14.14-all.zip",
+      "archive_path": "/Users/leonbei/BachelorThesis/flex_compare/flex_compare/internal/fusion_miner/vendor/prom-packages/ProM-Models-6.14.14-all.zip",
+      "archive_exists": true,
+      "archive_downloaded_now": false,
+      "archive_sha256": "c38e634dc052cd5d90cd209b1b2f90b1731608178e10be746eefc666f1e84132",
+      "archive_error": null,
+      "archive_expected_but_missing": false,
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/prom-models-6.14.14"
+    },
+    {
+      "name": "ProM-Plugins",
+      "version": "6.14.7",
+      "url": "https://www.promtools.org/prom6/packages615/ProM-Plugins/ProM-Plugins-6.14.7-all.zip",
+      "archive_path": "/Users/leonbei/BachelorThesis/flex_compare/flex_compare/internal/fusion_miner/vendor/prom-packages/ProM-Plugins-6.14.7-all.zip",
+      "archive_exists": true,
+      "archive_downloaded_now": false,
+      "archive_sha256": "306ce9f61a7f3be9a44c8c71f52cf04849696fc0116939580a7c3f9398e60b8f",
+      "archive_error": null,
+      "archive_expected_but_missing": false,
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/prom-plugins-6.14.7"
+    },
+    {
+      "name": "ProcessTree",
+      "version": "6.9.98",
+      "url": "https://www.promtools.org/prom6/packages615/ProcessTree/ProcessTree-6.9.98-all.zip",
+      "archive_path": "/Users/leonbei/BachelorThesis/flex_compare/flex_compare/internal/fusion_miner/vendor/prom-packages/ProcessTree-6.9.98-all.zip",
+      "archive_exists": true,
+      "archive_downloaded_now": false,
+      "archive_sha256": "58f3a0374187022cfb1ff9681d6ed38260dfcda7a5aefb810fcda1b661d61f62",
+      "archive_error": null,
+      "archive_expected_but_missing": false,
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/processtree-6.9.98"
+    },
+    {
+      "name": "Properties",
+      "version": "6.9.106",
+      "url": "https://www.promtools.org/prom6/packages615/Properties/Properties-6.9.106-all.zip",
+      "archive_path": "/Users/leonbei/BachelorThesis/flex_compare/flex_compare/internal/fusion_miner/vendor/prom-packages/Properties-6.9.106-all.zip",
+      "archive_exists": true,
+      "archive_downloaded_now": false,
+      "archive_sha256": "f195de7122aa391af8c4b355561fa397dbffc608e822473c44dbdd8e076d4db7",
+      "archive_error": null,
+      "archive_expected_but_missing": false,
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/properties-6.9.106"
+    },
+    {
+      "name": "Sat4j",
+      "version": "6.9.7",
+      "url": "https://www.promtools.org/prom6/packages615/Sat4j/Sat4j-6.9.7-all.zip",
+      "archive_path": "/Users/leonbei/BachelorThesis/flex_compare/flex_compare/internal/fusion_miner/vendor/prom-packages/Sat4j-6.9.7-all.zip",
+      "archive_exists": true,
+      "archive_downloaded_now": false,
+      "archive_sha256": "5bf3a3358ec4a8e94c692984d4c42a632174c808ae1af82b32c2fdd7a263ea1f",
+      "archive_error": null,
+      "archive_expected_but_missing": false,
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/sat4j-6.9.7"
+    },
+    {
+      "name": "Saxon",
+      "version": "6.9.69",
+      "url": "https://www.promtools.org/prom6/packages615/Saxon/Saxon-6.9.69-all.zip",
+      "archive_path": "/Users/leonbei/BachelorThesis/flex_compare/flex_compare/internal/fusion_miner/vendor/prom-packages/Saxon-6.9.69-all.zip",
+      "archive_exists": true,
+      "archive_downloaded_now": false,
+      "archive_sha256": "06382fc9adf7e0a84090ffb2b61ceaa8fa6a449f1ed6ec2cc3d1c58c606ea8e5",
+      "archive_error": null,
+      "archive_expected_but_missing": false,
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/saxon-6.9.69"
+    },
+    {
+      "name": "TraceAlignmentWithGuideTree",
+      "version": "6.9.63",
+      "url": "https://www.promtools.org/prom6/packages615/TraceAlignmentWithGuideTree/TraceAlignmentWithGuideTree-6.9.63-all.zip",
+      "archive_path": "/Users/leonbei/BachelorThesis/flex_compare/flex_compare/internal/fusion_miner/vendor/prom-packages/TraceAlignmentWithGuideTree-6.9.63-all.zip",
+      "archive_exists": true,
+      "archive_downloaded_now": false,
+      "archive_sha256": "8b6a3492319a2ffac7aef60786c99cd2011437ab9a8311c5f0663006d57b8373",
+      "archive_error": null,
+      "archive_expected_but_missing": false,
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/tracealignmentwithguidetree-6.9.63"
+    },
+    {
+      "name": "TransitionSystems",
+      "version": "6.12.1",
+      "url": "https://www.promtools.org/prom6/packages615/TransitionSystems/TransitionSystems-6.12.1-all.zip",
+      "archive_path": "/Users/leonbei/BachelorThesis/flex_compare/flex_compare/internal/fusion_miner/vendor/prom-packages/TransitionSystems-6.12.1-all.zip",
+      "archive_exists": true,
+      "archive_downloaded_now": false,
+      "archive_sha256": "fef5bb698c2e1de564ad7354707fbbb8314cdbc12e24d68a50dc334eb8ab422c",
+      "archive_error": null,
+      "archive_expected_but_missing": false,
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/transitionsystems-6.12.1"
+    },
+    {
+      "name": "Widgets",
+      "version": "6.12.2",
+      "url": "https://www.promtools.org/prom6/packages615/Widgets/Widgets-6.12.2-all.zip",
+      "archive_path": "/Users/leonbei/BachelorThesis/flex_compare/flex_compare/internal/fusion_miner/vendor/prom-packages/Widgets-6.12.2-all.zip",
+      "archive_exists": true,
+      "archive_downloaded_now": false,
+      "archive_sha256": "fe26af3498fa0f6084fcd66ea9ccb5952e34b4ec31b391ba013844e232e3037c",
+      "archive_error": null,
+      "archive_expected_but_missing": false,
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/widgets-6.12.2"
+    },
+    {
+      "name": "XESLite",
+      "version": "6.9.338",
+      "url": "https://www.promtools.org/prom6/packages615/XESLite/XESLite-6.9.338-all.zip",
+      "archive_path": "/Users/leonbei/BachelorThesis/flex_compare/flex_compare/internal/fusion_miner/vendor/prom-packages/XESLite-6.9.338-all.zip",
+      "archive_exists": true,
+      "archive_downloaded_now": false,
+      "archive_sha256": "1bae30f5d11b27adc58e61af47790f376fa356a8c1d4b78b723ea70d50b16c7a",
+      "archive_error": null,
+      "archive_expected_but_missing": false,
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/xeslite-6.9.338"
+    },
+    {
+      "name": "YAWL",
+      "version": "6.9.64",
+      "url": "https://www.promtools.org/prom6/packages615/YAWL/YAWL-6.9.64-all.zip",
+      "archive_path": "/Users/leonbei/BachelorThesis/flex_compare/flex_compare/internal/fusion_miner/vendor/prom-packages/YAWL-6.9.64-all.zip",
+      "archive_exists": true,
+      "archive_downloaded_now": false,
+      "archive_sha256": "edd52c37c3a9dbf1a2c84c521f76b313156160f448de1f1a88c734eb5737246a",
+      "archive_error": null,
+      "archive_expected_but_missing": false,
+      "local_dir": "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/yawl-6.9.64"
+    }
+  ],
+  "runtime_classpath_jars": [
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/dist/ProM-Framework-6.14.45.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/dist/ProM-Contexts-6.14.14.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/dist/ProM-Models-6.14.14.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/dist/ProM-Plugins-6.14.7.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/lib/Spex-1.1.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/lib/TableLayout-20050920.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/lib/UITopiaResources-0.6-20190913.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/lib/Uitopia-0.6-20190913.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/lib/bsh-2.0b4.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/lib/commons-compress-1.13.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/lib/commons-logging-1.1.3.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/lib/guava-16.0.1.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/lib/jargs-latest.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/lib/jgraph-5.13.0.4.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/lib/junit-4.12.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/lib/slickerbox-1.0rc1.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/acceptingpetrinet-6.11.196/AcceptingPetriNet.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/animation-6.9.75/Animation.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/apacheutils-6.13.4/ApacheUtils.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/apacheutils-6.13.4/lib/ant-1.9.4.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/apacheutils-6.13.4/lib/antlr4-runtime-4.5.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/apacheutils-6.13.4/lib/asm-5.0.3.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/apacheutils-6.13.4/lib/axis-1.4.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/apacheutils-6.13.4/lib/batik-anim-1.9.1.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/apacheutils-6.13.4/lib/batik-awt-util-1.9.1.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/apacheutils-6.13.4/lib/batik-bridge-1.9.1.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/apacheutils-6.13.4/lib/batik-codec-1.9.1.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/apacheutils-6.13.4/lib/batik-css-1.9.1.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/apacheutils-6.13.4/lib/batik-dom-1.9.1.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/apacheutils-6.13.4/lib/batik-ext-1.9.1.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/apacheutils-6.13.4/lib/batik-extension-1.9.1.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/apacheutils-6.13.4/lib/batik-gui-util-1.9.1.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/apacheutils-6.13.4/lib/batik-gvt-1.9.1.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/apacheutils-6.13.4/lib/batik-parser-1.9.1.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/apacheutils-6.13.4/lib/batik-rasterizer-1.9.1.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/apacheutils-6.13.4/lib/batik-script-1.9.1.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/apacheutils-6.13.4/lib/batik-svg-dom-1.9.1.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/apacheutils-6.13.4/lib/batik-svggen-1.9.1.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/apacheutils-6.13.4/lib/batik-swing-1.9.1.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/apacheutils-6.13.4/lib/batik-transcoder-1.9.1.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/apacheutils-6.13.4/lib/batik-util-1.9.1.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/apacheutils-6.13.4/lib/batik-xml-1.9.1.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/apacheutils-6.13.4/lib/collections-generic-4.01.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/apacheutils-6.13.4/lib/commons-beanutils-1.9.4.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/apacheutils-6.13.4/lib/commons-cli-1.3.1.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/apacheutils-6.13.4/lib/commons-collections-3.2.2.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/apacheutils-6.13.4/lib/commons-collections4-4.4.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/apacheutils-6.13.4/lib/commons-digester-2.1.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/apacheutils-6.13.4/lib/commons-io-2.4.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/apacheutils-6.13.4/lib/commons-lang3-3.12.0.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/apacheutils-6.13.4/lib/commons-logging-1.2.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/apacheutils-6.13.4/lib/commons-math3-3.6.1.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/apacheutils-6.13.4/lib/commons-text-1.9.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/apacheutils-6.13.4/lib/compress-lzf-1.0.3.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/apacheutils-6.13.4/lib/concurrent-trees-2.6.0.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/apacheutils-6.13.4/lib/cqengine-2.7.1.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/apacheutils-6.13.4/lib/exp4j-0.3.8.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/apacheutils-6.13.4/lib/fastutil-7.1.0.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/apacheutils-6.13.4/lib/fop-2.2.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/apacheutils-6.13.4/lib/gson-2.3.1.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/apacheutils-6.13.4/lib/jackson-annotations-2.8.0.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/apacheutils-6.13.4/lib/jackson-core-2.8.1.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/apacheutils-6.13.4/lib/jackson-databind-2.8.1.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/apacheutils-6.13.4/lib/java-merge-sort-1.0.0.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/apacheutils-6.13.4/lib/javassist-3.18.2-GA.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/apacheutils-6.13.4/lib/jdom-legacy-1.1.3.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/apacheutils-6.13.4/lib/joda-time-2.9.4.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/apacheutils-6.13.4/lib/juniversalchardet-1.0.3.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/apacheutils-6.13.4/lib/kryo-3.0.3.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/apacheutils-6.13.4/lib/kryo-serializers-0.37.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/apacheutils-6.13.4/lib/lz4-1.3.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/apacheutils-6.13.4/lib/mapdb-2.0-beta13.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/apacheutils-6.13.4/lib/minlog-1.3.0.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/apacheutils-6.13.4/lib/objenesis-2.1.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/apacheutils-6.13.4/lib/opencsv-2.4-patched.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/apacheutils-6.13.4/lib/opencsv-5.5.2.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/apacheutils-6.13.4/lib/protobuf-java-2.6.1.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/apacheutils-6.13.4/lib/reflectasm-1.10.1.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/apacheutils-6.13.4/lib/reflections-0.9.10.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/apacheutils-6.13.4/lib/simmetrics-latest.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/apacheutils-6.13.4/lib/sqlite-jdbc-3.15.1.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/apacheutils-6.13.4/lib/uncommons-maths-1.2.3.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/apacheutils-6.13.4/lib/univocity-parsers-2.2.2.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/apacheutils-6.13.4/lib/xpp3-1.1.4c.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/basicutils-6.12.1/BasicUtils.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/basicutils-6.12.1/lib/FilterableSortableTablePanel-latest.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/basicutils-6.12.1/lib/colt-1.2.0.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/basicutils-6.12.1/lib/flanagan-0.9alpha.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/basicutils-6.12.1/lib/jas-plotter-2.2.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/basicutils-6.12.1/lib/javacsv-2.1.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/basicutils-6.12.1/lib/javailp-1.2a.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/basicutils-6.12.1/lib/jbpt-0.2.429.1.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/basicutils-6.12.1/lib/jcommon-1.0.24.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/basicutils-6.12.1/lib/jfreechart-1.0.19.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/basicutils-6.12.1/lib/jgrapht-jdk1.6.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/basicutils-6.12.1/lib/jlfgr-1_0.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/basicutils-6.12.1/lib/jmathplot-unknown.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/basicutils-6.12.1/lib/jung-algorithms-2.0.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/basicutils-6.12.1/lib/jung-api-2.0.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/basicutils-6.12.1/lib/jung-graph-impl-2.0.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/basicutils-6.12.1/lib/jung-io-2.0.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/basicutils-6.12.1/lib/jung-visualization-2.0.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/basicutils-6.12.1/lib/jython-standalone-2.7.0.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/basicutils-6.12.1/lib/openide-lookup-1.9-patched-1.0.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/basicutils-6.12.1/lib/prefuse-core-1.0.0.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/basicutils-6.12.1/lib/trove4j-3.0.3.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/basicutils-6.12.1/lib/ujmp-complete-0.2.5.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/basicutils-6.12.1/lib/xstream-1.4.9.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/declareminerful-6.9.76/DeclareMinerFul.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/declareminerful-6.9.76/lib/MINERful-20170222.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/declareminerful-6.9.76/lib/automaton-1.12-1.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/declareminerful-6.9.76/lib/combinatoricslib-2.1.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/declareminerful-6.9.76/lib/dom4j-1.6.1.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/declareminerful-6.9.76/lib/jsr305-3.0.2.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/declareminerful-6.9.76/lib/resources.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/declareminerful-6.9.76/lib/xml-apis-1.0.b2.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/declareminervisualizer-6.9.50/DeclareMinerVisualizer.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/declarevisualizer-6.9.94/DeclareVisualizer.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/efficientstorage-6.15.3/EfficientStorage.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/flex-6.9.63/Flex.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/fusionminerful-6.12.2/FusionMinerFul.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/gplv2utils-6.9.73/GPLv2Utils.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/gplv2utils-6.9.73/lib/DistLib-unknown.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/gplv2utils-6.9.73/lib/jfxrt-20161125.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/gplv2utils-6.9.73/lib/mysql-connector-java-6.0.6.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/graphviz-6.14.2/GraphViz.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/graphviz-6.14.2/lib/grappa.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/graphviz-6.14.2/lib/itextpdf.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/guidetreeminer-6.9.57/GuideTreeMiner.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/heuristicscnetminer-6.9.44/HeuristicsCNetMiner.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/heuristicsminer-6.10.78/HeuristicsMiner.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/inductiveminer-6.14.5/InductiveMiner.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/inductiveminer-6.14.5/lib/rsyntaxtextarea-2.5.8.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/inductiveminerdeprecated-6.14.12/InductiveMinerDeprecated.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/inductiveminerdeprecated-6.14.12/lib/rsyntaxtextarea-2.5.8.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/interactivevisualization-6.9.57/InteractiveVisualization.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/jaxb-6.9.6/JAXB.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/jaxb-6.9.6/lib/javax.activation-api-1.2.0.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/jaxb-6.9.6/lib/jaxb-api-2.4.0-b180830.0359.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/kitfox-6.9.6/KitFox.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/lpengine-6.9.90/LPEngine.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/ltl2automaton-6.9.86/LTL2Automaton.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/log-6.14.3/Log.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/logdialog-6.12.3/LogDialog.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/lpsolve-5.5.4/LpSolve_mac/lpsolve55j.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/mixedparadigm-6.9.39/MixedParadigm.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/murata-6.14.3/Murata.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/osservice-6.9.57/OSService.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/openxes-6.14.7/OpenXES.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/openxes-6.14.7/lib/Spex-1.1.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/openxes-6.14.7/lib/guava-16.0.1.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/pnanalysis-6.13.1/PNAnalysis.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/pnetalignmentanalysis-6.10.114/PNetAlignmentAnalysis.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/pnetreplayer-6.11.191/PNetReplayer.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/performance-6.9.59/Performance.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/petrinets-6.12.2/PetriNets.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/prom-contexts-6.14.14/ProM-Contexts.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/prom-contexts-6.14.14/lib/Spex-1.1.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/prom-contexts-6.14.14/lib/UITopiaResources-0.6-20190913.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/prom-contexts-6.14.14/lib/Uitopia-0.6-20190913.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/prom-contexts-6.14.14/lib/bsh-2.0b4.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/prom-contexts-6.14.14/lib/guava-16.0.1.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/prom-contexts-6.14.14/lib/junit-4.12.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/prom-framework-6.14.45/ProM-Framework.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/prom-framework-6.14.45/lib/TableLayout-20050920.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/prom-framework-6.14.45/lib/commons-compress-1.13.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/prom-framework-6.14.45/lib/commons-logging-1.1.3.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/prom-framework-6.14.45/lib/jargs-latest.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/prom-framework-6.14.45/lib/jgraph-5.13.0.4.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/prom-framework-6.14.45/lib/slickerbox-1.0rc1.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/prom-models-6.14.14/ProM-Models.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/prom-plugins-6.14.7/ProM-Plugins.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/processtree-6.9.98/ProcessTree.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/properties-6.9.106/Properties.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/sat4j-6.9.7/Sat4j.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/saxon-6.9.69/Saxon.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/saxon-6.9.69/lib/rhino-1.7.7.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/saxon-6.9.69/lib/saxon-9he.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/tracealignmentwithguidetree-6.9.63/TraceAlignmentWithGuideTree.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/transitionsystems-6.12.1/TransitionSystems.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/widgets-6.12.2/Widgets.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/widgets-6.12.2/lib/freehep-graphics2d-2.4.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/widgets-6.12.2/lib/freehep-graphicsbase-2.4.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/widgets-6.12.2/lib/freehep-graphicsio-2.4.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/widgets-6.12.2/lib/freehep-graphicsio-emf-2.4.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/widgets-6.12.2/lib/freehep-graphicsio-java-2.4.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/widgets-6.12.2/lib/freehep-graphicsio-pdf-2.4.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/widgets-6.12.2/lib/freehep-graphicsio-ps-2.4.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/widgets-6.12.2/lib/freehep-graphicsio-svg-2.4.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/widgets-6.12.2/lib/freehep-graphicsio-swf-2.4.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/widgets-6.12.2/lib/freehep-graphicsio-tests-2.4.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/widgets-6.12.2/lib/freehep-io-2.2.2.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/widgets-6.12.2/lib/japura-1.12.3.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/widgets-6.12.2/lib/jcalendar-1.4.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/xeslite-6.9.338/XESLite.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/xeslite-6.9.338/lib/dictomaton-1.2.1.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/xeslite-6.9.338/lib/high-scale-lib-1.1.4.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/xeslite-6.9.338/lib/java-sizeof-0.0.5.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/yawl-6.9.64/YAWL.jar",
+    "/Users/leonbei/BachelorThesis/flex_compare/tools/ProM/packages/yawl-6.9.64/lib/YAWLEditor-2.3.5.wo.jgraph.jar"
+  ]
+}

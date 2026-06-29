@@ -1,0 +1,173 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# Questionnaire — SEMI-STRUCTURED class · T+E architecture · [ALIGNED-OVERLEAF]
+# ─────────────────────────────────────────────────────────────────────────────
+# Wording/scales aligned 1:1 with the FINAL instrument in the thesis:
+#   chapters/05_characteristics.tex, Section "The questionnaire"
+#   (sec:final-questionnaire; SSOT push 2026-06-20). Aligned 2026-06-26.
+#
+# Changes vs. the previous [AI-DRAFT] line (2026-06-20):
+#   - Phase T: a-priori IN item (T-Sm-IN-1) REMOVED. Phase T is now
+#     {BQ-1, BQ-2, SF-1}, max 3. Order BQ-1, BQ-2, SF-1 (per the final tables).
+#   - Phase E: the E-Sm-Gate and E-Sm-SF-1 were REMOVED. Phase E is now the
+#     four items {BQ-1, BQ-2, IN-1, IN-2}, max 8 (was max 10 with gate+SF).
+#   - All question text and 2/1/0 anchors replaced with the final wording.
+#   - phase_t_seed values were re-derived to the new wording. Entries marked
+#     "[verify]" are auto-aligned and need a human a-priori review.
+#
+# Split candidates (SSOT): T-Sm-SF-1, T-Sm-BQ-1, T-Sm-BQ-2 — flagged, not split.
+#
+# NOTE: the YAML keys ``value: ja|nein`` are kept as internal data tokens
+# (validator + scoring code rely on them). Display labels are English.
+
+meta:
+  class: semi
+  label: Semi-Structured
+  status: "[ALIGNED-OVERLEAF 2026-06-26]"
+  source: chapters/05_characteristics.tex · sec:final-questionnaire
+  # 3 T-items (max 3 Yes) · 4 E-items × 2 pt = max 8.
+  phase_t_max: 3
+  phase_e_max: 8
+  combination:
+    mode: weighted
+    borderline_margin: 10
+    note: "Equal weight per item: Fit = 3/7·Tfit + 4/7·Efit (3 T-items, 4 E-items)."
+
+# ── STUFE 1 — Capability/Routing (unscored) ─────────────────────────────────
+stufe1:
+  - id: S1.1
+    kind: paradigm
+    sf: SF-1
+    question: >-
+      Which modeling paradigm does the miner follow per its specification —
+      imperative, declarative, or hybrid?
+    note: "Pre-pended context field, no score."
+
+  - id: S1.3
+    kind: differentiation
+    question: >-
+      Does the miner have a mechanism that differentiates locally and switches
+      modeling mode (e.g. a segmentation / zoning parameter)?
+    answers: ["Yes (which one)", "No"]
+    note: "Suggests Semi suitability but is not evidence. Unscored."
+
+# ── PHASE T — Theoretical · 3 items · Yes/No ────────────────────────────────
+# A single-mode miner (imperative-only like IM, or declarative-only like
+# MINERful) gets "n/a" instead of No on T-Sm-SF-1.
+phase_t:
+  - id: T-Sm-BQ-1
+    axis: BQ
+    title: Differential restriction mechanism
+    measure: "Distinguishes regular vs variable behavior, restricts differentially"
+    question: >-
+      Does the selected setup document a mechanism that distinguishes regular
+      from variable behavior and applies restriction differentially (tight where
+      behavior is regular, open where it varies)?
+    doku_hint: "Region/zone-bound restriction; whether thresholds are bound to detected regions."
+    allow_nz: false
+    split_candidate: true
+    scale:
+      - {value: "ja",   label: "differential, region-bound restriction"}
+      - {value: "nein", label: "only global / fixed restriction"}
+    phase_t_seed:
+      imp:  {value: "nein", note: "Global noise threshold, not regionally bound."}
+      fus:  {value: "ja",   note: "Pruner hierarchy + fragment detection enable zone-bound filtering."}
+      decl: {value: "nein", note: "MINERful thresholds are global per constraint template."}
+      pm4-heuristics: {value: "nein", note: "Global dependency threshold."}
+
+  - id: T-Sm-BQ-2
+    axis: BQ
+    title: Documented replayability guarantee
+    measure: "Fitness by construction"
+    question: >-
+      Does the algorithm or selected configuration provide a documented
+      replayability guarantee for the observed log behavior?
+    doku_hint: "Fitness/replay guarantee and default of the frequency/noise filter."
+    allow_nz: false
+    split_candidate: true
+    scale:
+      - {value: "ja",   label: "fitness by construction"}
+      - {value: "nein", label: "filters by default"}
+    phase_t_seed:
+      imp:  {value: "ja",   note: "IMf keeps every variant replayable by default. [verify]"}
+      fus:  {value: "ja",   note: "Fusion hybrid guarantees replay via the PNwA core."}
+      decl: {value: "ja",   note: "MINERful returns constraints satisfied by all traces by default. [verify]"}
+      pm4-heuristics: {value: "nein", note: "Heuristics miner filters frequency edges by default."}
+
+  - id: T-Sm-SF-1
+    axis: SF
+    title: Fixed and open dependencies side by side
+    measure: "Carries both portions in one model"
+    question: >-
+      Can the output notation represent fixed and open dependencies side by side
+      within one model?
+    doku_hint: "Whether the notation can carry fixed and open dependencies together (hybrid capability)."
+    allow_nz: true            # single-mode miner → n/a
+    split_candidate: true
+    scale:
+      - {value: "ja",   label: "represents fixed and open dependencies together"}
+      - {value: "nein", label: "not both (possibly n/a)"}
+    phase_t_seed:
+      imp:  {value: "nz",   note: "Single-mode (imperative only) — n/a."}
+      fus:  {value: "ja",   note: "Hybrid with a zoning component (Declare/IM fusion)."}
+      decl: {value: "nz",   note: "Single-mode (declarative only) — n/a."}
+      pm4-heuristics: {value: "nz", note: "Single-mode (imperative) — n/a."}
+
+# ── PHASE E — Empirical · 4 items · 0/1/2 · max 8 ───────────────────────────
+phase_e_gate: null
+
+phase_e:
+  - id: E-Sm-BQ-1
+    axis: BQ
+    title: Local restriction (tight in fragments, open between)
+    measure: "Local trade-off calibration"
+    question: >-
+      Does the model restrict behavior locally, tight inside the fragments and
+      open between them, rather than applying one uniform level of restriction?
+    route: "Model read across stable and flexible regions."
+    metric_keys: []
+    allow_nz: false
+    scale:
+      - {score: 2, label: "stable fragments remain restricted; flexible arrangement remains open"}
+      - {score: 1, label: "one side is only partly preserved: some stable relations dissolve, or some flexible relations are over-restricted"}
+      - {score: 0, label: "uniform treatment dominates: stable fragments largely dissolve, or flexible arrangement is largely forced into one order"}
+
+  - id: E-Sm-BQ-2
+    axis: BQ
+    title: Replayability of attested variants
+    measure: "Fitness / trace fit"
+    question: >-
+      Do the attested variants remain replayable, both the fixed fragment
+      sequences and the arrangements observed between fragments?
+    route: "Metric where computable (fitness / trace fit); else model read."
+    metric_keys: [replay_fitness, non_vacuous_satisfaction_rate]
+    allow_nz: false
+    scale:
+      - {score: 2, label: "all attested fragment sequences and arrangements remain replayable"}
+      - {score: 1, label: "dominant variants remain replayable; some rare variants drop"}
+      - {score: 0, label: "even frequent variants drop because a fragment is broken or an arrangement is forced"}
+
+  - id: E-Sm-IN-1
+    axis: IN
+    title: Distinguishability of regions
+    measure: "Region boundary visibility"
+    question: "Are the stable and flexible reference regions distinguishable in the output?"
+    route: "Observation of zone/region boundaries on the model."
+    metric_keys: []
+    allow_nz: false
+    scale:
+      - {score: 2, label: "both region types clearly locatable"}
+      - {score: 1, label: "distinction only partly readable"}
+      - {score: 0, label: "no recognizable boundary"}
+
+  - id: E-Sm-IN-2
+    axis: IN
+    title: Integrated readability
+    measure: "Connected whole across regions"
+    question: "Is the output readable as one connected model across stable and flexible regions?"
+    route: "Observation across the whole model."
+    metric_keys: []
+    allow_nz: false
+    scale:
+      - {score: 2, label: "one connected whole; stable and flexible parts can be read together without overload"}
+      - {score: 1, label: "connected, but dense or laboriously readable"}
+      - {score: 0, label: "fragmented, or so overloaded that the stable and flexible parts cannot be read as one model"}
