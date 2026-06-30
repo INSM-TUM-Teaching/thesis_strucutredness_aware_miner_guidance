@@ -23,9 +23,20 @@ import zipfile
 from pathlib import Path
 from typing import Any, Dict, Iterator
 
-from openpyxl import Workbook
-from openpyxl import load_workbook
-from openpyxl.worksheet.datavalidation import DataValidation
+# openpyxl backs only the auxiliary cross-run xlsx metric aggregate; it is not
+# needed for discovery, metrics, or the markdown/Petri/process-tree artifacts the
+# flex_compare app actually renders. Keep it optional so a missing openpyxl
+# degrades the xlsx export to a no-op instead of crashing every imperative run.
+try:
+    from openpyxl import Workbook
+    from openpyxl import load_workbook
+    from openpyxl.worksheet.datavalidation import DataValidation
+    _OPENPYXL_AVAILABLE = True
+except ModuleNotFoundError:
+    Workbook = None  # type: ignore[assignment]
+    load_workbook = None  # type: ignore[assignment]
+    DataValidation = None  # type: ignore[assignment]
+    _OPENPYXL_AVAILABLE = False
 import pm4py
 from pm4py.objects.log.importer.xes import importer as xes_importer
 
@@ -697,19 +708,26 @@ def generate_pilot_sheet(
         noise_threshold=noise_threshold,
     )[0]
     report_row = make_report_row(result_align)
-    excel_path = output_root / _EXCEL_FILENAME
-    excel_row = _build_quantitative_excel_row(
-        log_name=log_name,
-        structuredness_class=structuredness,
-        generated_at=date_str,
-        run_id=run_id_val,
-        conformance_method=conformance_method,
-        noise_threshold=noise_threshold,
-        log_stats=log_stats,
-        result_align=result_align,
-        result_token=result_token,
-    )
-    _update_quantitative_metrics_workbook(excel_path=excel_path, row=excel_row)
+    # The xlsx aggregate is best-effort: without openpyxl the run still yields
+    # the markdown, Petri net, process tree and metrics that the app consumes.
+    if _OPENPYXL_AVAILABLE:
+        excel_path = output_root / _EXCEL_FILENAME
+        excel_row = _build_quantitative_excel_row(
+            log_name=log_name,
+            structuredness_class=structuredness,
+            generated_at=date_str,
+            run_id=run_id_val,
+            conformance_method=conformance_method,
+            noise_threshold=noise_threshold,
+            log_stats=log_stats,
+            result_align=result_align,
+            result_token=result_token,
+        )
+        _update_quantitative_metrics_workbook(excel_path=excel_path, row=excel_row)
+    else:
+        excel_path = None
+        print("[pilot_sheet] openpyxl not installed — skipping xlsx metric "
+              "aggregate (run otherwise unaffected).", flush=True)
 
     markdown = _build_markdown(
         run_id=run_id_val,
@@ -758,7 +776,7 @@ def generate_pilot_sheet(
         "result_token": result_token,
         "artifacts": {
             "markdown_path": str(markdown_path),
-            "excel_path": str(excel_path),
+            "excel_path": str(excel_path) if excel_path else None,
             "process_tree_path": str(visuals["process_tree_path"]) if visuals.get("process_tree_path") else None,
             "petri_net_path": str(visuals["petri_net_path"]) if visuals.get("petri_net_path") else None,
             "petri_net_pnml_path": str(visuals["petri_net_pnml_path"]) if visuals.get("petri_net_pnml_path") else None,

@@ -268,23 +268,34 @@ def generate_pilot_sheet(
         csv_path = Path(result["csv_path"])
         html_path = visuals_dir / "declare_model_declare_js.html"
         png_path = visuals_dir / "declare_model_declare_js.png"
+        # The interactive declare-js HTML is the visualization the app renders;
+        # it is required, so a failure here still raises under the strict
+        # "declare-js is the only allowed visualization" policy.
         render_declare_js_html(
             csv_path=csv_path,
             html_output_path=html_path,
             title=f"Declare Model: {log_path.stem}",
         )
-        render_declare_js_png(
-            html_path=html_path,
-            png_output_path=png_path,
-        )
         declare_viz_path = str(html_path)
-        declare_viz_png_path = str(png_path)
         declare_viz_engine = "declare_js"
-        declare_viz_kind = "html+png"
+        declare_viz_kind = "html"
         declare_viz_layout_applied = "auto_layout_via_gear"
         declare_viz_snapshot_stage = "post_auto_layout"
         result["declare_visualization_layout_applied"] = declare_viz_layout_applied
         result["declare_visualization_snapshot_stage"] = declare_viz_snapshot_stage
+        # The static PNG snapshot is an auxiliary artifact (Playwright/Chromium)
+        # that the app does not consume — it only embeds the HTML. Keep it
+        # best-effort so a missing Playwright does not fail the whole run.
+        try:
+            render_declare_js_png(
+                html_path=html_path,
+                png_output_path=png_path,
+            )
+            declare_viz_png_path = str(png_path)
+            declare_viz_kind = "html+png"
+        except Exception as png_exc:
+            declare_viz_error = f"declare-js PNG snapshot skipped: {png_exc}"
+            print(f"[pilot_sheet] {declare_viz_error}", flush=True)
     except Exception as exc:
         declare_viz_error = f"declare-js rendering failed: {exc}"
         # Strict policy: declare-js is the only allowed visualization.

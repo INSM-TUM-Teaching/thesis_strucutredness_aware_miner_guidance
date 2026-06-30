@@ -103,9 +103,18 @@ def run_evaluation(
             or not viz_png_path
             or not Path(viz_png_path).exists()
         )
-        if html_missing or png_missing:
+        # The interactive declare-js HTML is what the app embeds and is
+        # required. The static PNG snapshot (Playwright/Chromium) is auxiliary
+        # and not consumed by the app, so a missing PNG is reported but does not
+        # fail the run.
+        if html_missing:
             raise RuntimeError(
-                "declare-js outputs missing: expected both HTML and PNG visualization artifacts."
+                "declare-js output missing: expected the HTML visualization artifact."
+            )
+        if png_missing and not visualization_error:
+            visualization_error = (
+                "declare-js PNG snapshot missing (auxiliary artifact; "
+                "install Playwright + Chromium to enable it)."
             )
         if viz_engine != "declare_js":
             raise RuntimeError(

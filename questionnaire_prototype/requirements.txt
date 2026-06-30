@@ -12,6 +12,14 @@ PyYAML>=6.0
 # Optional but recommended for the report-rendering path in declarative_miner.
 # graphviz>=0.20
 
+# Optional auxiliary artifacts — runs succeed without these, only the extra
+# export is skipped (see `pip install -e .[artifacts]`):
+#   openpyxl  — imperative_miner xlsx metric aggregate
+#   playwright — declarative_miner declare-js PNG snapshot
+#                (also needs `playwright install chromium`)
+# openpyxl>=3.1
+# playwright>=1.40
+
 # Dev / test extras — install via `pip install -e .[dev]`.
 # pytest>=8.0
 # pytest-cov>=5.0
