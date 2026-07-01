@@ -68,8 +68,7 @@ By the end of Tab 1 you know which class your log belongs to. That class is the 
 you carry into the next two tabs.
 
 ![Tab 1 — Log & ARM](docs/img/tab1_arm.png)
-> _Screenshot placeholder: Tab 1 with the activity relationships matrix and the
-> classification badge._
+
 
 ### Tab 2 — Miners: discover and compare models
 
@@ -92,7 +91,7 @@ bottom, a **comparison strip** lays every finished model next to the others so t
 differences are visible at a glance.
 
 ![Tab 2 — Miners](docs/img/tab2_miners.png)
-> _Screenshot placeholder: Tab 2 with two miner cards and the comparison strip._
+
 
 ### Tab 3 — Questionnaire: score a miner against a class
 
@@ -128,8 +127,6 @@ survives a restart. The tool records and aggregates your structured judgement; i
 not decide the miner choice for you.
 
 ![Tab 3 — Questionnaire](docs/img/tab3_questionnaire.png)
-> _Tab 3 Overview matrix: each cell carries a separate theoretical donut (`#Yes / #items`)
-> and empirical donut (percentage), with the per-log empirical spread below the empirical ring._
 
 ---
 
