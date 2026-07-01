@@ -24,10 +24,11 @@ SOFTWARE.
 
 Bundled native binaries under `tools/` carry their own upstream licenses:
 
-* `tools/automated-process-classification/`: Andree et al. 2025 (refer to the
-  upstream repo for the licence text — Apache 2.0 at the time of bundling).
-* `tools/MINERful/`: Iacometta & Di Ciccio 2025 (refer to the upstream
-  MINERful-Reloaded repository for licensing).
+* `tools/automated-process-classification/`: Andree et al. 2025 — see
+  https://github.com/INSM-TUM/automated-process-classification for the licence
+  text (Apache 2.0 at the time of bundling).
+* `tools/MINERful/`: Iacometta & Di Ciccio 2025 ("MINERful-Reloaded") — see
+  https://github.com/Process-in-Chains/MINERful for licensing.
 * `tools/ProM/`: ProM Framework + bundled plugins — see
   https://promtools.org/ for individual plugin licences.
 

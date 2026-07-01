@@ -1,4 +1,4 @@
-"""Flex Compare — slimmed-down, miner-flexible comparison Dash app.
+"""Prototype Tool - Structuredness-Aware Miner Guidance — miner-flexible comparison Dash app.
 
 Two tabs you actually use, plus a placeholder for the rubric:
 
@@ -38,7 +38,7 @@ logger = logging.getLogger(__name__)
 
 
 def create_app() -> dash.Dash:
-    app = dash.Dash(__name__, title="Flex Compare",
+    app = dash.Dash(__name__, title="Prototype Tool - Structuredness-Aware Miner Guidance",
                     suppress_callback_exceptions=True,
                     update_title=None)
     # Callable layout: Dash invokes it on every page load, so a browser reload

@@ -22,150 +22,175 @@
 meta:
   class: loosely
   label: Loosely Structured
-  status: "[ALIGNED-OVERLEAF 2026-06-26]"
+  status: '[ALIGNED-OVERLEAF 2026-07-01]'
   source: chapters/05_characteristics.tex · sec:final-questionnaire
-  # 3 T-items (max 3 Yes) · 4 E-items × 2 pt = max 8.
   phase_t_max: 3
   phase_e_max: 8
   combination:
     mode: weighted
     borderline_margin: 10
-    note: "Equal weight per item: Fit = 3/7·Tfit + 4/7·Efit (3 T-items, 4 E-items)."
-
+    note: 'Equal weight per item: Fit = 3/7·Tfit + 4/7·Efit (3 T-items, 4 E-items).'
 stufe1:
-  - id: S1.1
-    kind: paradigm
-    sf: SF-1
-    question: >-
-      Which modeling paradigm does the miner follow per its specification —
-      imperative, declarative, or hybrid?
-    note: "Pre-pended context field, no score."
-
-# ── PHASE T — Theoretical · 3 items · Yes/No ────────────────────────────────
+- id: S1.1
+  kind: paradigm
+  sf: SF-1
+  question: Which modeling paradigm does the miner follow per its specification — imperative, declarative,
+    or hybrid?
+  note: Pre-pended context field, no score.
 phase_t:
-  - id: T-L-BQ-1
-    axis: BQ
-    title: Restriction from support / frequency measure
-    measure: "Support/frequency-based restriction (not trace enumeration)"
-    question: >-
-      Does the algorithm derive its restrictions from a documented support or
-      frequency measure, rather than enumerating observed traces?
-    doku_hint: "Support/frequency/noise measure documented as the basis of restriction."
-    allow_nz: false
-    split_candidate: false
-    scale:
-      - {value: "ja",   label: "restriction from a support/frequency measure"}
-      - {value: "nein", label: "trace enumeration / no such measure"}
-    phase_t_seed:
-      imp:  {value: "ja",   note: "IMf restricts via a frequency-based noise filter (default 0.20)."}
-      fus:  {value: "ja",   note: "Fusion pipeline with pruner hierarchy and frequency thresholds."}
-      decl: {value: "ja",   note: "MINERful restricts via support/confidence thresholds."}
-      pm4-heuristics: {value: "ja", note: "Heuristics miner restricts via a dependency/frequency threshold."}
-
-  - id: T-L-BQ-2
-    axis: BQ
-    title: Generalization beyond observed variants
-    measure: "Generalization mechanism"
-    question: >-
-      Does the selected setup document a generalization mechanism (e.g.
-      abstraction, concurrency inference, threshold-based generalization) that
-      admits behavior beyond the exact observed variants, rather than
-      reconstructing only the observed traces?
-    doku_hint: "Abstraction / concurrency inference / threshold generalization beyond exact variants."
-    allow_nz: false
-    split_candidate: false
-    scale:
-      - {value: "ja",   label: "documented generalization beyond exact variants"}
-      - {value: "nein", label: "reconstructs only the observed traces"}
-    phase_t_seed:
-      imp:  {value: "ja",   note: "IMf generalizes via cuts and concurrency inference (process tree). [verify]"}
-      fus:  {value: "ja",   note: "Hybrid generalizes via the imperative backbone plus declarative layer. [verify]"}
-      decl: {value: "ja",   note: "Declare constraints generalize beyond observed traces by construction."}
-      pm4-heuristics: {value: "ja", note: "Heuristics miner infers concurrency / abstracts via thresholds. [verify]"}
-
-  - id: T-L-SF-1
-    axis: SF
-    title: Constraint-based bounding without fixed paths
-    measure: "Local-rule / constraint notation"
-    question: >-
-      Does the output notation allow behavior to be bounded through local rules
-      or constraints instead of requiring a fixed path structure?
-    doku_hint: "Whether the notation bounds behavior via local rules/constraints vs. a fixed path structure."
-    allow_nz: false
-    split_candidate: false
-    scale:
-      - {value: "ja",   label: "bounds behavior via local rules / constraints"}
-      - {value: "nein", label: "requires a fixed path structure"}
-    phase_t_seed:
-      imp:  {value: "nein", note: "Imperative output requires a connected path structure."}
-      fus:  {value: "ja",   note: "Hybrid carries a declarative constraint layer. [verify]"}
-      decl: {value: "ja",   note: "Declare bounds behavior through constraints, no fixed paths."}
-      pm4-heuristics: {value: "nein", note: "Petri/C-net imposes a path structure. [verify]"}
-
-# ── PHASE E — Empirical · 4 items · max 8 · BQ bipolar ──────────────────────
-# E-L-BQ-1 = effective restriction; E-L-BQ-2 = plausible generalization
-# (different observables: model checklist vs. fitness/model read).
+- id: T-L-BQ-1
+  axis: BQ
+  title: Evidence-gated per-restriction decision
+  measure: Each restriction decided separately, kept only when sufficiently supported
+  question: Does the selected setup decide each restriction separately, keeping it only when the log satisfies
+    it often enough?
+  doku_hint: Whether each restriction is decided separately and kept only when the log satisfies it often
+    enough (e.g. support/confidence threshold).
+  allow_nz: false
+  split_candidate: false
+  scale:
+  - value: ja
+    label: each restriction decided separately, kept only when sufficiently supported
+  - value: nein
+    label: no per-restriction evidence gating
+  phase_t_seed:
+    imp:
+      value: ja
+      note: IMf restricts via a frequency-based noise filter (default 0.20).
+    fus:
+      value: ja
+      note: Fusion pipeline with pruner hierarchy and frequency thresholds.
+    decl:
+      value: ja
+      note: MINERful restricts via support/confidence thresholds.
+    pm4-heuristics:
+      value: ja
+      note: Heuristics miner restricts via a dependency/frequency threshold.
+- id: T-L-BQ-2
+  axis: BQ
+  title: Generalization beyond observed variants
+  measure: Generalization mechanism
+  question: Is the selected setup documented to generalize, so that its output accepts behavior beyond
+    the exact traces in the log?
+  doku_hint: Abstraction / concurrency inference / threshold generalization beyond exact variants.
+  allow_nz: false
+  split_candidate: false
+  scale:
+  - value: ja
+    label: documented generalization beyond the exact traces in the log
+  - value: nein
+    label: reconstructs only the observed traces
+  phase_t_seed:
+    imp:
+      value: ja
+      note: IMf generalizes via cuts and concurrency inference (process tree). [verify]
+    fus:
+      value: ja
+      note: Hybrid generalizes via the imperative backbone plus declarative layer. [verify]
+    decl:
+      value: ja
+      note: Declare constraints generalize beyond observed traces by construction.
+    pm4-heuristics:
+      value: ja
+      note: Heuristics miner infers concurrency / abstracts via thresholds. [verify]
+- id: T-L-SF-1
+  axis: SF
+  title: Constraint-based bounding without fixed paths
+  measure: Local-rule / constraint notation
+  question: Does the output notation allow behavior to be bounded through local rules or constraints instead
+    of requiring a fixed path structure?
+  doku_hint: Whether the notation bounds behavior via local rules/constraints vs. a fixed path structure.
+  allow_nz: false
+  split_candidate: false
+  scale:
+  - value: ja
+    label: bounds behavior via local rules / constraints
+  - value: nein
+    label: requires a fixed path structure
+  phase_t_seed:
+    imp:
+      value: nein
+      note: Imperative output requires a connected path structure.
+    fus:
+      value: ja
+      note: Hybrid carries a declarative constraint layer. [verify]
+    decl:
+      value: ja
+      note: Declare bounds behavior through constraints, no fixed paths.
+    pm4-heuristics:
+      value: nein
+      note: Petri/C-net imposes a path structure. [verify]
 phase_e_gate: null
-
 phase_e:
-  - id: E-L-BQ-1
-    axis: BQ
-    title: Effective local restriction
-    measure: "Observed regularities enforced"
-    question: >-
-      Does the model impose local restrictions that effectively rule out
-      behavior the log clearly does not support?
-    route: >-
-      Model — short checklist of the few observed regularities (co-existence,
-      stable order): how many does the model enforce, and is clearly unsupported
-      test behavior rejected? + a look at whether almost everything stays
-      open / bypassable.
-    metric_keys: []
-    allow_nz: false
-    scale:
-      - {score: 2, label: "local restrictions reject clearly unsupported test behavior; open parts stay flexible"}
-      - {score: 1, label: "some restrictions reject unsupported test behavior, but large parts remain weak, vacuous, or bypassable"}
-      - {score: 0, label: "model is almost fully permissive; clearly unsupported test behavior is still accepted"}
-
-  - id: E-L-BQ-2
-    axis: BQ
-    title: Plausible generalization
-    measure: "Generalization / coverage"
-    question: "Does the model allow plausible behavior beyond the exactly observed trace variants?"
-    route: "Metric (fitness / trace fit) for replayability + model read for generalization."
-    metric_keys: [replay_fitness, non_vacuous_satisfaction_rate]
-    allow_nz: false
-    scale:
-      - {score: 2, label: "plausible unobserved recombinations are allowed; observed behavior remains replayable"}
-      - {score: 1, label: "only marginal generalization beyond exact variants"}
-      - {score: 0, label: "mainly exact-variant reconstruction, or observed behavior no longer replayable"}
-
-  - id: E-L-IN-1
-    axis: IN
-    title: Condensation to regularities
-    measure: "Depicted elements per activity"
-    question: >-
-      Does the output condense to a few essential regularities rather than
-      depicting many weak or repeated elements?
-    route: "Observation; support = number of depicted elements per activity."
-    metric_keys: [extended_cardoso_cfc, constraint_density]
-    allow_nz: false
-    scale:
-      - {score: 2, label: "compact core of regularities clearly recognizable"}
-      - {score: 1, label: "core recognizable but overloaded by weak or redundant elements"}
-      - {score: 0, label: "no readable core; display dominated by too many elements"}
-
-  - id: E-L-IN-2
-    axis: IN
-    title: Local dependencies without global order
-    measure: "Local order without forced overall chain"
-    question: >-
-      Does the output make local dependencies readable without presenting them
-      as one global execution order?
-    route: "Model view — local dependencies readable without forcing an overall chain."
-    metric_keys: []
-    allow_nz: false
-    scale:
-      - {score: 2, label: "local dependencies readable; no dominant global execution order presented"}
-      - {score: 1, label: "local dependencies partly readable, but a global ordering cue distracts or over-connects them"}
-      - {score: 0, label: "global order dominates, or no readable local dependency structure is visible"}
+- id: E-L-BQ-1
+  axis: BQ
+  title: Effective local restriction
+  measure: Observed regularities enforced
+  question: Does the model impose local restrictions that effectively rule out behavior the log clearly
+    does not support?
+  route: 'Model — short checklist of the few observed regularities (co-existence, stable order): how many
+    does the model enforce, and is clearly unsupported test behavior rejected? + a look at whether almost
+    everything stays open / bypassable.'
+  metric_keys: []
+  allow_nz: false
+  scale:
+  - score: 2
+    label: local restrictions reject clearly unsupported test behavior; open parts stay flexible
+  - score: 1
+    label: some restrictions reject unsupported test behavior, but large parts remain weak, vacuous, or
+      bypassable
+  - score: 0
+    label: model is almost fully permissive; clearly unsupported test behavior is still accepted
+- id: E-L-BQ-2
+  axis: BQ
+  title: Plausible generalization
+  measure: Generalization / coverage
+  question: Does the model admit behavior beyond the exactly observed trace variants while still replaying
+    the observed ones?
+  route: Metric (fitness / trace fit) for replayability + model read for generalization.
+  metric_keys:
+  - replay_fitness
+  - non_vacuous_satisfaction_rate
+  allow_nz: false
+  scale:
+  - score: 2
+    label: recombinations consistent with the discovered restrictions but not seen in the log are admitted;
+      observed behavior remains replayable
+  - score: 1
+    label: only marginal generalization beyond exact variants
+  - score: 0
+    label: mainly exact-variant reconstruction, or observed behavior no longer replayable
+- id: E-L-IN-1
+  axis: IN
+  title: Condensation to regularities
+  measure: Depicted elements per activity
+  question: Does the output condense to a few essential regularities rather than depicting many weak or
+    repeated elements?
+  route: Observation; support = number of depicted elements per activity.
+  metric_keys:
+  - extended_cardoso_cfc
+  - constraint_density
+  allow_nz: false
+  scale:
+  - score: 2
+    label: compact core of regularities clearly recognizable
+  - score: 1
+    label: core recognizable but overloaded by weak or redundant elements
+  - score: 0
+    label: no readable core; display dominated by too many elements
+- id: E-L-IN-2
+  axis: IN
+  title: Local dependencies without global order
+  measure: Local order without forced overall chain
+  question: Does the output make local dependencies readable without presenting them as one global execution
+    order?
+  route: Model view — local dependencies readable without forcing an overall chain.
+  metric_keys: []
+  allow_nz: false
+  scale:
+  - score: 2
+    label: local dependencies readable; no dominant global execution order presented
+  - score: 1
+    label: local dependencies partly readable, but a global ordering cue distracts or over-connects them
+  - score: 0
+    label: global order dominates, or no readable local dependency structure is visible

@@ -3,7 +3,7 @@ requires = ["setuptools>=68", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "flex-compare"
+name = "structuredness-aware-miner-guidance"
 version = "0.1.0"
 description = "Structuredness-aware discovery playground — pick a log, classify it via ARM, add miners with their own configs, compare results side-by-side."
 readme = "README.md"
@@ -48,7 +48,7 @@ artifacts = [
 ]
 
 [project.scripts]
-flex-compare = "flex_compare.app:_cli"
+miner-guidance = "flex_compare.app:_cli"
 
 [project.urls]
 Repository = "https://github.com/INSM-TUM-Teaching/thesis_strucutredness_aware_miner_guidance"

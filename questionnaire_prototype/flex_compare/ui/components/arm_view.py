@@ -1,11 +1,10 @@
 """Rich ARM (Activity Relationship Matrix) renderer for flex_compare.
 
 Ported from ``miners.comparison_app.ui.components.tabs.arm`` with the color
-scheme stripped: cell-codes, Andree percentages, classification, explainer
-and the existential fragment / choice / periphery + parallel-segment
-decomposition are kept. Verdict matrix and SF-2 coverage panels are deliberately
-not ported — they hang on the comparison_app's fixed ``imp/decl/fus`` miner
-anchors, which flex_compare's bring-your-own-miner architecture does not have.
+scheme stripped: cell-codes, Andree percentages, classification, explainer are
+kept. Verdict matrix and SF-2 coverage panels are deliberately not ported —
+they hang on the comparison_app's fixed ``imp/decl/fus`` miner anchors, which
+flex_compare's bring-your-own-miner architecture does not have.
 
 The heatmap stays a Plotly figure (so the cell-code text + hover stay intact)
 but its colorscale is a single neutral fill: the user reads the Andree code
@@ -18,12 +17,7 @@ from typing import Any, Optional
 import plotly.graph_objects as go
 from dash import dcc, html
 
-from flex_compare.internal.shared.arm_fragments import decompose_fragments
 from flex_compare.internal.shared.arm_runner import ArmResult
-from flex_compare.internal.shared.parallel_segments import (
-    find_segments,
-    relations_from_arm,
-)
 
 
 # --------------------------------------------------------------------------- #
@@ -410,128 +404,6 @@ def _heatmap(result: ArmResult) -> dcc.Graph:
 
 
 # --------------------------------------------------------------------------- #
-# Fragment / Choice / Periphery + Parallel-segment panel — chips → mono spans.
-# --------------------------------------------------------------------------- #
-
-def _mono_span(text: str) -> html.Span:
-    return html.Span(
-        text,
-        style={"fontFamily": "monospace", "fontSize": "13px",
-               "padding": "2px 8px", "marginRight": "6px",
-               "marginBottom": "4px", "display": "inline-block",
-               "border": "1px solid var(--border-default, #E4E7ED)",
-               "borderRadius": "4px"},
-    )
-
-
-def _segment_verdict(segments) -> tuple[str, str]:
-    """(short label, rationale) for the Gate-1 verdict — colorless."""
-    def n_long(seg) -> int:
-        return sum(1 for n in seg.branch_lengths if n >= 2)
-
-    if any(n_long(s) >= 2 for s in segments):
-        return ("AND-over-sequences evidenced",
-                "≥2 parallel branches of length ≥2 → interleaving explosion possible.")
-    if any(any(n >= 2 for n in s.branch_lengths) for s in segments):
-        return ("weak evidence",
-                "only one long branch → no multi-branch interleaving.")
-    if segments:
-        return ("no evidence",
-                "only singleton concurrency (1+1) — as in loosely-structured.")
-    return ("no evidence", "no parallel-composed segments in the ARM.")
-
-
-def _fragment_panel(result: ArmResult) -> html.Div:
-    dec = decompose_fragments(result)
-
-    frag_rows = [
-        _mono_span(" ‖ ".join("→".join(b) for b in f.branches) or "—")
-        for f in dec.fragments
-    ] or [html.Span("—", className="pm-info")]
-    choice_rows = [
-        _mono_span(" ⊕ ".join(block) + "  (XOR)") for block in dec.choice_blocks
-    ] or [html.Span("—", className="pm-info")]
-    peri_rows = (
-        [_mono_span(a) for a in dec.periphery]
-        or [html.Span("—", className="pm-info")]
-    )
-
-    segments = find_segments(*relations_from_arm(result))
-    seg_rows = []
-    for i, s in enumerate(segments, 1):
-        seg_rows.append(html.Tr([
-            html.Td(f"#{i}"),
-            html.Td(" ‖ ".join("→".join(b) for b in s.branches),
-                    style={"fontFamily": "monospace"}),
-            html.Td("+".join(str(n) for n in s.branch_lengths),
-                    style={"textAlign": "right"}),
-            html.Td(f"{s.interleaving_cardinality:,}",
-                    style={"textAlign": "right"}),
-        ]))
-    label, why = _segment_verdict(segments)
-
-    return html.Div(
-        className="pm-card",
-        style={"marginTop": "20px"},
-        children=[
-            html.Div("Fragment / Choice / Periphery (purely existential, from the ARM)",
-                     className="pm-card-title"),
-            html.P(
-                "Andree: semi-structured = predefined, structured "
-                "fragments that are flexibly combined. Fragment = ⇔-clique "
-                "(mandatory, co-occurring), choice block = ⇎ (XOR, "
-                "strong but optional), periphery = ⇒ only (optional). No mining.",
-                className="pm-info",
-                style={"fontSize": "12px", "margin": "4px 0 10px"}),
-            html.Div([html.Span("Fragment(s) ⇔: ", className="pm-info"), *frag_rows],
-                     style={"marginBottom": "6px"}),
-            html.Div([html.Span("Choice ⇎: ", className="pm-info"), *choice_rows],
-                     style={"marginBottom": "6px"}),
-            html.Div([html.Span("Periphery ⇒: ", className="pm-info"), *peri_rows],
-                     style={"marginBottom": "12px"}),
-
-            html.Div("Parallel segments (temporal, from the ARM)",
-                     className="pm-subheading"),
-            html.Table(
-                className="pm-table",
-                children=[
-                    html.Thead(html.Tr([
-                        html.Th("#", style={"width": "40px"}),
-                        html.Th("Branches (‖)"),
-                        html.Th("Lengths", style={"width": "90px",
-                                                  "textAlign": "right"}),
-                        html.Th("Interleavings", style={"width": "120px",
-                                                        "textAlign": "right"}),
-                    ])),
-                    html.Tbody(seg_rows or [html.Tr([
-                        html.Td("—"),
-                        html.Td("no parallel-composed segments",
-                                className="pm-info"),
-                        html.Td("—", style={"textAlign": "right"}),
-                        html.Td("—", style={"textAlign": "right"}),
-                    ])]),
-                ],
-            ),
-            html.Div(
-                [html.Span("Gate-1 finding: ", className="pm-info"),
-                 html.Span(label, style={"fontWeight": "600"}),
-                 html.Span(" — " + why, className="pm-info",
-                           style={"fontSize": "12px", "marginLeft": "6px"})],
-                style={"marginTop": "10px"},
-            ),
-            html.Div(
-                "Fragment (existential) ≠ parallel segment (temporal): the fragment "
-                "is the mandatory ⇔-core, the segment is an interleaving block. "
-                "Both stem purely from the ARM (thresholds above), not from a "
-                "mined model.",
-                className="pm-info",
-                style={"fontSize": "11px", "marginTop": "10px"},
-            ),
-        ],
-    )
-
-
-# --------------------------------------------------------------------------- #
 # Top-level body renderer.
 # --------------------------------------------------------------------------- #
 
@@ -581,5 +453,4 @@ def render_arm_body(arm_result: Optional[dict]) -> html.Div:
         html.Div(style={"marginTop": "20px"},
                  children=_percentages_table(arm_result.get("percentages") or {})),
         html.Div(style={"marginTop": "16px"}, children=_legend()),
-        _fragment_panel(arm_result),
     ])

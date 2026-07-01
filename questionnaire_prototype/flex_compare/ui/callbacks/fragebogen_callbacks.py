@@ -32,6 +32,8 @@ from flex_compare import state as fc_state
 from flex_compare.fragebogen import items as fb_items
 from flex_compare.fragebogen import phase_a as fb_phase_a
 from flex_compare.fragebogen import phase_a_answers as fb_pa_answers
+from flex_compare.fragebogen import phase_e_answers as fb_pe_answers
+from flex_compare.fragebogen import phase_t_answers as fb_pt_answers
 from flex_compare.fragebogen import scores as fb_scores
 from flex_compare.fragebogen.items import get_item, items_for_class
 from flex_compare.fragebogen.log_discovery import logs_for_class
@@ -616,12 +618,14 @@ def register(app) -> None:
                 triggered_field = "note"
             break
 
-        persisted = fb_scores.load_score(log_id, slot, item_id)
+        # Read at the raw value layer so a note edit preserves an "nz" cell
+        # ("nicht beantwortbar") instead of collapsing it back to pending.
+        persisted = fb_pe_answers.load_score(log_id, slot, item_id)
         base = persisted or {}
-        score = base.get("score")
+        value = base.get("value")
         note = base.get("note") or ""
         if triggered_field == "score":
-            score = _coerce_score(triggered_value)
+            value = _coerce_score(triggered_value)
         elif triggered_field == "note":
             note = triggered_value or ""
 
@@ -629,17 +633,17 @@ def register(app) -> None:
         # navigation: nothing to persist if the candidate matches what's already
         # on disk (or an empty/unanswered cell when nothing is persisted yet).
         if persisted is not None:
-            if (score == persisted.get("score")
+            if (value == persisted.get("value")
                     and note == (persisted.get("note") or "")):
                 return no_update
         else:
-            if score is None and not note:
+            if value is None and not note:
                 return no_update
 
         try:
-            fb_scores.save_score(
+            fb_pe_answers.save_score(
                 log_id=log_id, slot=slot, item_id=item_id,
-                score=score, note=note,
+                value=value, note=note,
                 log_stem=log_path.stem,
                 instance_id=inst.id,
                 instance_label=inst.label or inst.id,
@@ -673,8 +677,14 @@ def register(app) -> None:
         instance_id = trig.get("instance")
         log_path_str = trig.get("log")
         item_id = trig.get("item")
-        clicked = _coerce_score(trig.get("score"))
-        if not instance_id or not log_path_str or not item_id or clicked is None:
+        # The tile id carries either a numeric score or the "nz" sentinel for
+        # the "nicht beantwortbar" tile (n.z. = 0 markiert, counts as 0 points).
+        raw_score = trig.get("score")
+        is_nz = (raw_score == "nz")
+        clicked_value = "nz" if is_nz else _coerce_score(raw_score)
+        if not instance_id or not log_path_str or not item_id:
+            return no_update, no_update
+        if not is_nz and clicked_value is None:
             return no_update, no_update
         state = _state_from_store(app_state_raw)
         inst = _find_instance(state, instance_id) if state else None
@@ -691,15 +701,15 @@ def register(app) -> None:
                            instance_id, exc)
             return no_update, no_update
 
-        persisted = fb_scores.load_score(log_id, slot, item_id) or {}
-        current = persisted.get("score")
+        persisted = fb_pe_answers.load_score(log_id, slot, item_id) or {}
+        current_value = persisted.get("value")
         note = persisted.get("note") or ""
         # Second click on the already-selected tile clears the answer.
-        new_score = None if clicked == current else clicked
+        new_value = None if clicked_value == current_value else clicked_value
         try:
-            fb_scores.save_score(
+            fb_pe_answers.save_score(
                 log_id=log_id, slot=slot, item_id=item_id,
-                score=new_score, note=note,
+                value=new_value, note=note,
                 log_stem=log_path.stem,
                 instance_id=inst.id,
                 instance_label=inst.label or inst.id,
@@ -712,7 +722,7 @@ def register(app) -> None:
             return no_update, f"⚠ Save failed: {exc}"
         nav = {**(nav or {}),
                "nonce": int((nav or {}).get("nonce") or 0) + 1}
-        verb = "cleared" if new_score is None else "saved"
+        verb = "cleared" if new_value is None else "saved"
         return nav, f"✓ Empirical · {item_id} · {log_path.stem} {verb}"
 
     # ── Phase-B: editable config → session-scoped override ─────────────────
@@ -815,7 +825,8 @@ def register(app) -> None:
 
         ``action`` = ``result`` → the result page (Fit + T/E breakdown);
         ``pa``/``edit`` → Phase A wizard (same editable surface);
-        ``pb`` → Phase B wizard. Resets the relevant nav cursor to the start.
+        ``pb``/``eb`` → Phase B wizard. Resets the relevant nav cursor to the
+        start.
         """
         trig = ctx.triggered_id
         if not isinstance(trig, dict):
@@ -837,8 +848,10 @@ def register(app) -> None:
         if action == "result":
             session["view"] = "result"
             return session, no_update, no_update
-        session["view"] = "phase_b" if action == "pb" else "phase_a"
-        if action == "pb":
+        # ``pb``/``eb`` → Phase B (Empirical); ``pa``/``edit`` → Phase A.
+        to_phase_b = action in ("pb", "eb")
+        session["view"] = "phase_b" if to_phase_b else "phase_a"
+        if to_phase_b:
             pa_out = no_update
             pb_out = {"log_idx": 0,
                       "nonce": int((pb_nav or {}).get("nonce") or 0) + 1}
@@ -847,6 +860,41 @@ def register(app) -> None:
                       "nonce": int((pa_nav or {}).get("nonce") or 0) + 1}
             pb_out = no_update
         return session, pa_out, pb_out
+
+    # ── Result: per-log row click → Phase B at that log ────────────────────
+    @app.callback(
+        Output(ids.FB_SESSION_STORE, "data", allow_duplicate=True),
+        Output(ids.FB_PHASE_B_NAV_STORE, "data", allow_duplicate=True),
+        Input({"type": "fc-fb-log-open", "instance": ALL,
+                "cls": ALL, "log_idx": ALL}, "n_clicks"),
+        State(ids.FB_SESSION_STORE, "data"),
+        State(ids.FB_PHASE_B_NAV_STORE, "data"),
+        prevent_initial_call=True,
+    )
+    def log_open(_clicks, session, pb_nav):
+        """A click on a per-log row of the result page opens the Empirical
+        survey (Phase B) with the nav cursor on that log."""
+        trig = ctx.triggered_id
+        if not isinstance(trig, dict):
+            return no_update, no_update
+        # Phantom-mount guard (see overview_action): act only on a real click.
+        if not any(c for c in (_clicks or []) if c):
+            return no_update, no_update
+        miner_id = trig.get("instance")
+        cls = trig.get("cls")
+        log_idx = trig.get("log_idx")
+        if not miner_id or not cls or log_idx is None:
+            return no_update, no_update
+        session = dict(session or {})
+        session["miner_id"] = miner_id
+        session["class"] = cls
+        session["view"] = "phase_b"
+        session["ov_open"] = None
+        session["pb_cfg"] = None
+        session["nonce"] = int(session.get("nonce") or 0) + 1
+        pb_out = {"log_idx": int(log_idx),
+                  "nonce": int((pb_nav or {}).get("nonce") or 0) + 1}
+        return session, pb_out
 
     # ── Phase-A survey: autosave per (miner, item) cell ────────────────────
     @app.callback(
@@ -937,28 +985,34 @@ def register(app) -> None:
             return no_update, no_update
         miner_id = trig.get("instance")
         item_id = trig.get("item")
-        clicked = _coerce_pa_score(trig.get("score"))
         cls = (session or {}).get("class")
-        if not miner_id or not item_id or clicked is None or not cls:
+        # The tile id carries either a numeric score or the "nz" sentinel for
+        # the "nicht beantwortbar" tile; both map onto a Phase-T value.
+        clicked_value = _pa_clicked_value(trig.get("score"))
+        if not miner_id or not item_id or clicked_value is None or not cls:
             return no_update, no_update
 
         persisted = fb_pa_answers.load_answer(cls, miner_id, item_id)
-        base = persisted or _seed_for(cls, miner_id, item_id) or {}
-        current = base.get("score")
-        note = base.get("note") or ""
+        if persisted is not None:
+            current_value = persisted.get("value")
+            note = persisted.get("note") or ""
+        else:
+            seed = _seed_for(cls, miner_id, item_id) or {}
+            current_value = _pa_score_to_value(seed.get("score"))
+            note = seed.get("note") or ""
         # Second click on the already-selected tile clears the answer.
-        new_score = None if clicked == current else clicked
+        new_value = None if clicked_value == current_value else clicked_value
         try:
-            fb_pa_answers.save_answer(cls=cls, miner_id=miner_id,
-                                       item_id=item_id, score=new_score,
-                                       note=note)
+            fb_pt_answers.save_answer(cls=cls, miner_id=miner_id,
+                                      item_id=item_id, value=new_value,
+                                      note=note)
         except OSError as exc:
             logger.warning("phase_a toggle: write failed for %s/%s/%s: %s",
                            cls, miner_id, item_id, exc)
             return no_update, f"⚠ Save failed: {exc}"
         nav = {**(nav or {}),
                "nonce": int((nav or {}).get("nonce") or 0) + 1}
-        verb = "cleared" if new_score is None else "saved"
+        verb = "cleared" if new_value is None else "saved"
         return nav, f"✓ Theoretical · {item_id} · {miner_id} {verb}"
 
 
@@ -974,6 +1028,26 @@ def _coerce_pa_score(value) -> Optional[int]:
     except (TypeError, ValueError):
         return None
     return None if v == -1 else v
+
+
+def _pa_score_to_value(score) -> Optional[str]:
+    """Phase-T value for a binary Phase-A score: 1→"ja", 0→"nein"."""
+    if score in (1, 2):  # 2 accepted for backward-compat with old encoding
+        return "ja"
+    if score == 0:
+        return "nein"
+    return None
+
+
+def _pa_clicked_value(raw) -> Optional[str]:
+    """Translate a Phase-A tile-id score into a Phase-T value.
+
+    The "nicht beantwortbar" tile carries the ``"nz"`` sentinel (n.z. = 0
+    markiert); every other tile carries a numeric Ja/Nein score.
+    """
+    if raw == "nz":
+        return "nz"
+    return _pa_score_to_value(_coerce_pa_score(raw))
 
 
 def _seed_for(cls: str, miner_id: str,

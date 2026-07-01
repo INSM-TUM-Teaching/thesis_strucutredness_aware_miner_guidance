@@ -348,17 +348,26 @@ def _tile_label(title: str, sub: str):
 
 def _likert_tiles(role: str, scale_rows: list[dict],
                   current_score: Optional[int], instance: str,
+                  *, nz_selected: bool = False,
                   **extra) -> html.Div:
-    """Clickable answer tiles (one per scale row).
+    """Clickable answer tiles (one per scale row) plus a "nicht beantwortbar"
+    tile.
 
     Replaces ``dcc.RadioItems`` so a click saves immediately and a second click
     on the selected tile deselects it (handled in the option callbacks). The
     tile whose ``score`` equals ``current_score`` carries ``is-selected``.
+
+    The trailing "nicht beantwortbar" tile (score sentinel ``"nz"``) is offered
+    on every item. Picking it stores ``n.z.`` = 0 markiert: the item counts as 0
+    points and stays in the denominator (Doc §5), the same point-wise as the
+    lowest rating but tracked separately so the rater can flag an item they
+    cannot assess.
     """
     tiles = []
     for row in scale_rows:
         score = row.get("score")
-        selected = (current_score is not None and score == current_score)
+        selected = (not nz_selected
+                    and current_score is not None and score == current_score)
         tiles.append(html.Button(
             id=ids.fc_id(role, instance, score=score, **extra),
             n_clicks=0,
@@ -370,6 +379,17 @@ def _likert_tiles(role: str, scale_rows: list[dict],
                           className="fc-survey-likert-cell-label"),
             ],
         ))
+    tiles.append(html.Button(
+        id=ids.fc_id(role, instance, score="nz", **extra),
+        n_clicks=0,
+        className="fc-survey-likert-cell fc-survey-likert-cell-nz"
+                  + (" is-selected" if nz_selected else ""),
+        children=[
+            html.Span("n/a", className="fc-survey-likert-cell-num"),
+            html.Span("Not answerable — counts as 0 points",
+                      className="fc-survey-likert-cell-label"),
+        ],
+    ))
     return html.Div(tiles, className="fc-survey-likert")
 
 
@@ -453,10 +473,12 @@ def _phase_a_item_card(item: dict, cls: str,
     if persisted is not None:
         current_score = persisted.get("score")
         current_note = persisted.get("note") or ""
+        nz_selected = persisted.get("value") == "nz"
         source_label = "✎ manual"
     else:
         current_score = seed.get("score")
         current_note = seed.get("note") or ""
+        nz_selected = False
         source_label = ("Seed [AI DRAFT]" if seed else "Not answered yet")
 
     scale_rows = list(item.get("scale", []))
@@ -497,7 +519,8 @@ def _phase_a_item_card(item: dict, cls: str,
 
     body = html.Div(className="fc-survey-card-body", children=[
         _likert_tiles("fb-pa-opt", scale_rows, current_score,
-                      selected_miner, item=item["id"]),
+                      selected_miner, nz_selected=nz_selected,
+                      item=item["id"]),
     ])
 
     return html.Div(className="fc-survey-card", children=[header, body])
@@ -557,21 +580,27 @@ def _band(fit: Optional[float]) -> Optional[str]:
 def _suitability_sentence(cls: str, t_res: dict, e_res: dict) -> str:
     """Hedged, within-class suitability reading.
 
-    Reports the Theoretical and Empirical legs separately (Doc §5,
-    ``mode=separate``), never combines them into a verdict, and never ranks
-    across miners (RC3). Marks an incomplete reading as provisional.
+    Reports the Theoretical and Empirical legs separately, never combines them
+    into a verdict, and never ranks across miners (RC3). Marks an incomplete
+    reading as provisional. The Theoretical leg is reported as a fraction
+    (``#Yes / #items``), the Empirical leg as a percentage band.
     """
     cls_label = _CLASS_LABEL.get(cls, cls)
-    fit_t, fit_e = t_res.get("fit"), e_res.get("fit")
-    band_t, band_e = _band(fit_t), _band(fit_e)
+    fit_e = e_res.get("fit")
+    band_e = _band(fit_e)
 
-    leg_t = (f"the theoretical evaluation suggests {band_t} ({fit_t:.0f}%)"
-             if band_t else "the theoretical evaluation has not been scored yet")
+    t_answered = t_res.get("max", 0)
+    t_points = t_res.get("points", 0)
+    t_total = t_res.get("max_full") or 3
+    leg_t = (f"the theoretical evaluation reaches {t_points} of {t_total} "
+             "criteria"
+             if t_answered else "the theoretical evaluation has not been "
+             "scored yet")
     leg_e = (f"the empirical evaluation suggests {band_e} ({fit_e:.0f}%)"
              if band_e else "the empirical evaluation has not been scored yet")
 
     sentence = f"For the {cls_label} class, {leg_t}, while {leg_e}."
-    incomplete = ((fit_t is not None and not t_res.get("complete"))
+    incomplete = ((t_answered and not t_res.get("complete"))
                   or (fit_e is not None and not e_res.get("complete")))
     if incomplete:
         sentence += " Scoring is still incomplete, so this reading is provisional."
@@ -612,14 +641,18 @@ def _axis_groups_e(cls: str, per_cell: dict,
         answered = sum(1 for c in cells if c.get("value") is not None)
         points = sum(c.get("points", 0) for c in cells
                      if c.get("value") is not None)
+        # Mean score this question earned across the logs it was rated on (out
+        # of 2); this is the per-question contribution the Empirical Fit sums.
+        avg = points / answered if answered else None
+        right = (f"{answered}/{n_logs} logs · {points} pts · Ø {avg:.1f}/2"
+                 if answered else "—")
         groups.setdefault(axis, [])
         if axis not in order:
             order.append(axis)
         groups[axis].append({
             "id": item["id"],
             "title": item.get("title", ""),
-            "right": (f"{answered}/{n_logs} logs · {points} pts"
-                      if answered else "—"),
+            "right": right,
             "scored": answered > 0,
         })
     return [(ax, groups[ax]) for ax in order]
@@ -649,7 +682,9 @@ def _breakdown_column(heading: str,
                 for r in rows
             ],
         ]))
-    return html.Div(className="fc-survey-2col-pane", children=[
+    return html.Div(className="fc-survey-2col-pane",
+                    **{"data-fc-scroll-key": f"result-{heading}"},
+                    children=[
         html.Div(heading, className="fc-survey-section-label"),
         *sections,
     ])
@@ -680,13 +715,9 @@ def _result_view(inst: MinerInstance, cls: str,
     t_res = fb_phase_t.phase_t_fit_with_answers(selected_miner, cls)
     e_res = fb_phase_e.phase_e_fit(selected_miner, cls, state=state)
 
-    fit_t, fit_e = t_res.get("fit"), e_res.get("fit")
-    _w = fb_combine.class_weights(cls)
-    fit_c = fb_combine.combined_fit(fit_t, fit_e,
-                                    n_t=_w["n_t"], n_e=_w["n_e"])
+    fit_e = e_res.get("fit")
     t_answered = t_res.get("n_ja", 0) + t_res.get("n_nein", 0) + t_res.get("n_nz", 0)
     t_total = t_res.get("max_full") or (t_answered + t_res.get("n_pending", 0))
-    t_sub = f"{t_res.get('points', 0)} / {t_res.get('max', 0)} pts"
     e_total = e_res.get("n_logs", 0) * e_res.get("n_items", 0)
     e_sub = f"{e_res.get('points', 0)} / {e_res.get('max', 0)} pts"
 
@@ -694,17 +725,34 @@ def _result_view(inst: MinerInstance, cls: str,
                  if c.get("value") is None]
 
     # ── Donuts ───────────────────────────────────────────────────────────
-    # Combined Fit leads; Theoretical and Empirical Fit show its subdivision.
+    # Theoretical Fit (reported as #Ja / #Items, e.g. 2/3) and Empirical Fit
+    # (a percentage) stand side by side — the two legs are never combined.
+    # Each donut carries a "View details" link straight into its survey.
+    def _donut_col(donut: html.Div, action: Optional[str] = None) -> html.Div:
+        children = [donut]
+        if action is not None:
+            children.append(html.Button(
+                "View details ↗",
+                id=ids.fc_id("fb-ov-action", inst.id, cls=cls, action=action),
+                n_clicks=0,
+                className="fc-survey-btn fc-survey-btn-ghost",
+                style={"fontSize": "11px", "padding": "5px 10px",
+                       "whiteSpace": "nowrap"}))
+        return html.Div(
+            style={"display": "flex", "flexDirection": "column",
+                   "alignItems": "center", "gap": "10px"},
+            children=children)
+
     donuts = html.Div(
         style={"display": "flex", "gap": "32px", "padding": "28px 24px",
                "justifyContent": "center", "alignItems": "flex-start",
                "flexWrap": "wrap"},
         children=[
-            _score_donut(fit_c, size=200, label="Fit"),
-            _score_donut(fit_t, size=160, label="Theoretical Fit",
-                         sublabel=t_sub),
-            _score_donut(fit_e, size=160, label="Empirical Fit",
-                         sublabel=e_sub),
+            _donut_col(_theoretical_donut(t_res, size=180,
+                                          label="Theoretical Fit"),
+                       action="pa"),
+            _donut_col(_score_donut(fit_e, size=180, label="Empirical Fit",
+                                    sublabel=e_sub), action="eb"),
         ],
     )
 
@@ -740,7 +788,7 @@ def _result_view(inst: MinerInstance, cls: str,
     )
 
     # ── Block 1b — per-log Empirical breakdown ───────────────────────────
-    per_log_block = _per_log_block(e_res)
+    per_log_block = _per_log_block(e_res, inst, cls)
 
     # ── Block 2 — per-category breakdown ─────────────────────────────────
     breakdown = html.Div(
@@ -772,8 +820,10 @@ def _result_view(inst: MinerInstance, cls: str,
     body = html.Div(className="fc-survey-card", children=[
         html.Div(className="fc-survey-card-head", children=[
             html.Div("Result", className="fc-survey-card-eyebrow"),
-            html.Div("Combined Fit with its breakdown into Theoretical Fit "
-                      "and Empirical Fit for this miner × class combination.",
+            html.Div("Theoretical Fit (as #Yes / #items) and Empirical Fit "
+                      "(as a percentage) reported side by side for this "
+                      "miner × class combination — the two legs are not "
+                      "combined.",
                       className="fc-survey-card-lede"),
         ]),
         donuts,
@@ -808,15 +858,25 @@ def _result_view(inst: MinerInstance, cls: str,
     return [topbar, _nav_strip("result", has_selection=True), body]
 
 
-def _per_log_block(e_res: dict) -> html.Div:
+def _per_log_block(e_res: dict, inst: MinerInstance, cls: str) -> html.Div:
     """Per-log Empirical breakdown: how many points each log scored, its own
     Fit, and the note that the Empirical Fit is the mean ("Mittelmaß") of them.
 
     Built from ``phase_e_fit``'s ``per_log`` so it always matches the donut.
+    Each scored-log row is clickable and jumps back into the Empirical survey
+    (Phase E) positioned at that log, so the rater can revise its cells.
     """
     per_log = e_res.get("per_log") or {}
     if not per_log:
         return html.Div()
+
+    # Map each per-log stem to its index in the Phase-E log order so a click can
+    # set the Phase-B nav cursor straight to that log. Stems outside the current
+    # Phase-E selection (e.g. limited) stay non-clickable.
+    log_idx_by_stem = {
+        log_path.stem: i
+        for i, log_path in enumerate(fb_phase_b.phase_b_logs(cls))
+    }
 
     def _row(stem: str, acc: dict) -> html.Tr:
         lfit = acc.get("fit")
@@ -825,15 +885,35 @@ def _per_log_block(e_res: dict) -> html.Div:
         pts_txt = f"{acc.get('points', 0)} / {acc.get('max', 0)} pts"
         if pending:
             pts_txt += f" · {pending} pending"
-        return html.Tr([
-            html.Td(stem, className="fc-survey-row-miner",
-                    style={"fontWeight": "600"}),
-            html.Td(pts_txt, style={"color": "var(--text-muted)",
-                                    "fontSize": "12px"}),
-            html.Td(fit_txt, style={"textAlign": "right",
-                                    "fontVariantNumeric": "tabular-nums",
-                                    "fontWeight": "700"}),
-        ])
+        log_idx = log_idx_by_stem.get(stem)
+        clickable = log_idx is not None
+        name_children = [html.Span(stem)]
+        if clickable:
+            name_children.append(
+                html.Span("↗", className="fc-survey-log-open",
+                          style={"marginLeft": "6px",
+                                 "color": "var(--ring-accent, #5B6CB8)"}))
+        row_kwargs = {}
+        if clickable:
+            row_kwargs = {
+                "id": ids.fc_id("fb-log-open", inst.id, cls=cls,
+                                log_idx=log_idx),
+                "n_clicks": 0,
+                "className": "fc-survey-log-row is-clickable",
+                "title": "Open this log in the Empirical survey",
+            }
+        return html.Tr(
+            children=[
+                html.Td(name_children, className="fc-survey-row-miner",
+                        style={"fontWeight": "600"}),
+                html.Td(pts_txt, style={"color": "var(--text-muted)",
+                                        "fontSize": "12px"}),
+                html.Td(fit_txt, style={"textAlign": "right",
+                                        "fontVariantNumeric": "tabular-nums",
+                                        "fontWeight": "700"}),
+            ],
+            **row_kwargs,
+        )
 
     rows = [_row(stem, acc) for stem, acc in per_log.items()]
 
@@ -1000,7 +1080,9 @@ def _phase_b_left_pane(inst: MinerInstance, log_path: Path, cls: str,
                "borderTop": "1px solid var(--border-default)"},
         children=[_phase_b_config_block(inst)],
     )
-    return html.Div(className="fc-survey-2col-pane", children=[
+    return html.Div(className="fc-survey-2col-pane",
+                    **{"data-fc-scroll-key": f"pb-left-{log_path.stem}"},
+                    children=[
         html.Div(className="fc-survey-card", children=[
             head, *model_children, config_block,
         ]),
@@ -1023,7 +1105,9 @@ def _phase_b_no_run_block(inst: MinerInstance, log_path: Path,
         ],
     )
     left = _phase_b_left_pane(inst, log_path, cls, [note])
-    right = html.Div(className="fc-survey-2col-pane", children=[
+    right = html.Div(className="fc-survey-2col-pane",
+                     **{"data-fc-scroll-key": f"pb-norun-right-{log_path.stem}"},
+                     children=[
         _empty_card("Run the log to score it",
                     "The questions appear once a model is discovered."),
     ])
@@ -1053,7 +1137,9 @@ def _phase_b_log_card(inst: MinerInstance, slot: str, log_path: Path,
         _phase_b_item_card(inst, log_path, slot, item, metrics)
         for item in items
     ]
-    right = html.Div(className="fc-survey-2col-pane", children=[
+    right = html.Div(className="fc-survey-2col-pane",
+                     **{"data-fc-scroll-key": f"pb-right-{log_path.stem}"},
+                     children=[
         html.Div(className="fc-survey-card", children=[
             html.Div(className="fc-survey-card-head", children=[
                 html.Div("Questions", className="fc-survey-card-eyebrow"),
@@ -1152,6 +1238,8 @@ def _phase_b_item_card(inst: MinerInstance, log_path: Path, slot: str,
                      if isinstance(persisted, dict) else None)
     current_note = ((persisted.get("note")
                      if isinstance(persisted, dict) else "") or "")
+    nz_selected = (isinstance(persisted, dict)
+                   and persisted.get("value") == "nz")
 
     scale_rows = list(item["scale"])
     segments = fb_annotations.segments_for(log_path.stem, item_id)
@@ -1189,6 +1277,7 @@ def _phase_b_item_card(inst: MinerInstance, log_path: Path, slot: str,
             (_segment_hint_block(segments) if segments else html.Div()),
             (_rules_hint_block(rules) if rules else html.Div()),
             _likert_tiles("fb-pb-opt", scale_rows, current_score, inst.id,
+                          nz_selected=nz_selected,
                           log=str(log_path), item=item_id),
             (html.Div(evidence_chips,
                        style={"display": "flex", "gap": "6px",
@@ -1269,15 +1358,6 @@ def _overview_view(state: FlexState,
                          html.Div("Overview", className="fc-survey-card-eyebrow"),
                          html.Div("Fit matrix · Miner × Class",
                                   className="fc-survey-card-title"),
-                         html.Div(
-                             "Each cell shows the combined Fit "
-                             "(3/7·Theoretical + 4/7·Empirical) for that miner "
-                             "and class. Click \"View details\" to see the "
-                             "breakdown into Theoretical and Empirical Fit and "
-                             "to edit the answers. Only miners that have been "
-                             "scored are listed; use \"+ Add miner\" to score "
-                             "another one.",
-                             className="fc-survey-card-lede"),
                      ]),
                      _add_miner_button(),
                  ]),
@@ -1346,49 +1426,153 @@ def _overview_row(inst: MinerInstance, state: FlexState,
 
     if rep is None:
         rep = fb_combine.report(selected_miner, with_answers=True, state=state)
-    fits = rep.get("fits") or {}
+    e_fits = rep.get("e_fits") or {}
+    per_class = rep.get("per_class") or {}
 
     cells = []
     for cls_key in ("structured", "semi", "loosely"):
-        cells.append(_overview_cell(inst, cls_key, fits.get(cls_key)))
+        t_det = (per_class.get(cls_key) or {}).get("phase_t") or {}
+        e_det = (per_class.get(cls_key) or {}).get("phase_e") or {}
+        log_fits = [acc.get("fit")
+                    for acc in (e_det.get("per_log") or {}).values()
+                    if acc.get("fit") is not None]
+        cells.append(_overview_cell(inst, cls_key, t_det,
+                                    e_fits.get(cls_key), log_fits))
 
     return html.Tr([name_cell, *cells])
 
 
 def _overview_cell(inst: MinerInstance, cls: str,
-                    fit_c: Optional[float]):
-    # One ring per cell: the combined Fit (3/7·T + 4/7·E). A ``None`` fit
-    # renders as "—" (the combined Fit is defined only once both legs are
-    # scorable). A "View details" button opens the result page for the
-    # Theoretical/Empirical breakdown.
+                    t_det: Optional[dict],
+                    fit_e: Optional[float],
+                    log_fits: Optional[list[float]] = None):
+    # Two rings per cell — the legs are never combined: the Theoretical Fit
+    # (as #Yes / #items, e.g. 2/3) and the Empirical Fit (a percentage). Each
+    # renders "—" while unscored. Below the Empirical ring, a dot-strip shows
+    # the spread of the per-log Empirical Fits so a tight cluster and a wide
+    # spread behind the same mean stay distinguishable. A "View details" button
+    # opens the result page.
+    e_col = [_score_donut(fit_e, size=72, label="Empirical")]
+    spread = _per_log_spread(log_fits or [])
+    if spread is not None:
+        e_col.append(spread)
+    rings = html.Div(
+        style={"display": "flex", "gap": "18px", "alignItems": "flex-start",
+               "justifyContent": "center", "flexWrap": "wrap"},
+        children=[
+            _theoretical_donut(t_det, size=72, label="Theoretical"),
+            html.Div(style={"display": "flex", "flexDirection": "column",
+                            "alignItems": "center", "gap": "4px"},
+                     children=e_col),
+        ],
+    )
+    children = [rings]
+    children.append(html.Button(
+        "View details",
+        id=ids.fc_id("fb-ov-action", inst.id, cls=cls, action="result"),
+        n_clicks=0,
+        className="fc-survey-btn fc-survey-btn-ghost",
+        style={"fontSize": "11px", "padding": "5px 10px",
+               "whiteSpace": "nowrap"},
+    ))
     return html.Td(
         style={"textAlign": "center", "verticalAlign": "middle"},
         children=html.Div(
             style={"display": "flex", "flexDirection": "column",
                    "alignItems": "center", "gap": "10px"},
-            children=[
-                _score_donut(fit_c, size=72, label="Fit"),
-                html.Button(
-                    "View details",
-                    id=ids.fc_id("fb-ov-action", inst.id, cls=cls,
-                                 action="result"),
-                    n_clicks=0,
-                    className="fc-survey-btn fc-survey-btn-ghost",
-                    style={"fontSize": "11px", "padding": "5px 10px",
-                           "whiteSpace": "nowrap"},
-                ),
-            ],
+            children=children,
         ),
+    )
+
+
+def _per_log_spread(log_fits: list[float]) -> Optional[html.Div]:
+    """Compact dot-strip of the per-log Empirical Fits (0–100 axis).
+
+    One neutral dot per scored log; the mean (the Empirical Fit itself) is a
+    short tick. Returns ``None`` when fewer than two logs are scored, since a
+    single point carries no distribution. Stays farbneutral and within-cell —
+    it describes one (miner, class) cell, never a cross-miner comparison.
+    """
+    fits = [max(0.0, min(100.0, float(f))) for f in log_fits]
+    if len(fits) < 2:
+        return None
+    lo, hi = min(fits), max(fits)
+    mean = sum(fits) / len(fits)
+
+    width, height, pad = 92, 16, 5
+    span = width - 2 * pad
+
+    def _x(pct: float) -> float:
+        return pad + span * (pct / 100.0)
+
+    y = height / 2
+    dot = _resolve_css_var("var(--ring-accent, #5B6CB8)")
+    track = _resolve_css_var("var(--ring-track, #E4E7ED)")
+    parts = [
+        f'<svg xmlns="http://www.w3.org/2000/svg" '
+        f'viewBox="0 0 {width} {height}">',
+        f'<line x1="{pad}" y1="{y}" x2="{width - pad}" y2="{y}" '
+        f'stroke="{track}" stroke-width="2" stroke-linecap="round"/>',
+        # min–max range bar behind the dots
+        f'<line x1="{_x(lo):.2f}" y1="{y}" x2="{_x(hi):.2f}" y2="{y}" '
+        f'stroke="{dot}" stroke-width="2" stroke-linecap="round" '
+        f'opacity="0.35"/>',
+    ]
+    for f in fits:
+        parts.append(f'<circle cx="{_x(f):.2f}" cy="{y}" r="2.4" '
+                     f'fill="{dot}"/>')
+    # Mean tick (taller than the dots) so the cell's Empirical mean is locatable.
+    parts.append(f'<line x1="{_x(mean):.2f}" y1="{y - 4}" '
+                 f'x2="{_x(mean):.2f}" y2="{y + 4}" '
+                 f'stroke="{dot}" stroke-width="1.5"/>')
+    parts.append('</svg>')
+    from urllib.parse import quote
+    src = "data:image/svg+xml;utf8," + quote("".join(parts))
+
+    range_txt = (f"{lo:.0f}–{hi:.0f}%" if hi > lo else f"{lo:.0f}%")
+    return html.Div(
+        title=(f"Empirical per-log spread · {len(fits)} logs · "
+               f"min {lo:.0f}% · mean {mean:.0f}% · max {hi:.0f}%"),
+        style={"display": "flex", "flexDirection": "column",
+               "alignItems": "center", "gap": "1px"},
+        children=[
+            html.Img(src=src,
+                     style={"width": f"{width}px", "height": f"{height}px"}),
+            html.Div(f"E per-log · {range_txt}",
+                     style={"fontSize": "9px", "color": "var(--text-muted)",
+                            "letterSpacing": "0.02em",
+                            "fontVariantNumeric": "tabular-nums"}),
+        ],
     )
 
 
 # ── Score donut (SVG via data URI) ─────────────────────────────────────────
 
+def _theoretical_donut(t_res: Optional[dict], *, size: int = 180,
+                       label: str = "Theoretical Fit") -> html.Div:
+    """Theoretical Fit ring, reported as a fraction ``#Ja / #Items`` (e.g.
+    ``2/3``) rather than a percentage. The arc fill follows ``points / max_full``;
+    an unscored leg (nothing answered) renders as an empty ring with ``—``."""
+    t_res = t_res or {}
+    points = t_res.get("points", 0)
+    max_full = t_res.get("max_full") or 3
+    answered = t_res.get("max", 0)  # #items that count (ja/nein/nz)
+    if answered <= 0 or not max_full:
+        return _score_donut(None, size=size, label=label, value_text="—")
+    pct = points / max_full * 100
+    return _score_donut(pct, size=size, label=label,
+                        value_text=f"{points}/{max_full}")
+
+
 def _score_donut(pct: Optional[float], *,
                  size: int = 200, label: str = "",
                  sublabel: str = "",
                  stroke: int = 10,
-                 accent: Optional[str] = None) -> html.Div:
+                 accent: Optional[str] = None,
+                 value_text: Optional[str] = None) -> html.Div:
+    """Score ring. The arc fill follows ``pct`` (0–100); the centre text is
+    ``"{pct}%"`` unless ``value_text`` overrides it (e.g. ``"2/3"`` for the
+    Theoretical Fit, which is reported as a fraction, not a percentage)."""
     pct_value = 0.0 if pct is None else max(0.0, min(100.0, float(pct)))
     radius = (size - stroke) / 2
     circumference = 2 * 3.141592653589793 * radius
@@ -1407,7 +1591,8 @@ def _score_donut(pct: Optional[float], *,
         color = accent
 
     track_color = "var(--ring-track, #E4E7ED)"
-    value_text = "—" if pct is None else f"{pct_value:.0f}%"
+    if value_text is None:
+        value_text = "—" if pct is None else f"{pct_value:.0f}%"
 
     svg_data_uri = _donut_svg_data_uri(size, stroke, radius, cx, cy,
                                          dash, gap, color, track_color)
