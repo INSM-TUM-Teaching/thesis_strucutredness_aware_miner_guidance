@@ -1,6 +1,7 @@
-# Setup — questionnaire_prototype (Flex Compare)
+# Setup — questionnaire_prototype (Prototype Tool - Structuredness-Aware Miner Guidance)
 
-This subdirectory is a self-contained copy of the **Flex Compare** tool. All paths
+This subdirectory is a self-contained copy of the **Prototype Tool - Structuredness-Aware
+Miner Guidance**. All paths
 resolve relative to this folder (`PROJECT_ROOT` in
 `flex_compare/internal/shared/paths.py` points here automatically). See `README.md`
 for the full tool documentation.
@@ -13,7 +14,7 @@ python -m venv .venv && source .venv/bin/activate
 pip install -e .[dev]
 
 python -m flex_compare.app        # http://127.0.0.1:8502
-# or: flex-compare
+# or: miner-guidance
 ```
 
 Requires **Python >= 3.11** and a **JDK** (for the Java miners MINERful and

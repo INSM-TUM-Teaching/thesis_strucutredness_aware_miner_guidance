@@ -60,7 +60,7 @@ def render(state: FlexState) -> html.Div:
                        "margin": "1.2rem auto 0 auto"},
                 children=[
                     html.Div([
-                        html.Div("Flex Compare", className="pm-brand-title"),
+                        html.Div("Prototype Tool - Structuredness-Aware Miner Guidance", className="pm-brand-title"),
                         html.Div(
                             "Discovery playground — pick a log, add miners, compare",
                             className="pm-brand-sub",

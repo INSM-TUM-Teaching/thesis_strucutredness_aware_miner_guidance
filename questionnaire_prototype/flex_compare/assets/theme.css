@@ -3348,6 +3348,32 @@ details[open] > summary::before {
   color: #1D4ED8;
   font-weight: 600;
 }
+/* "nicht beantwortbar" tile — a neutral 0-point escape hatch, set apart from
+   the rating tiles with a dashed border and muted ink. */
+.fc-survey-likert-cell-nz {
+  border-style: dashed;
+  background: var(--bg-subtle);
+}
+.fc-survey-likert-cell-nz .fc-survey-likert-cell-num,
+.fc-survey-likert-cell-nz .fc-survey-likert-cell-label {
+  color: var(--text-muted);
+  font-style: italic;
+}
+.fc-survey-likert-cell-nz.is-selected {
+  border-style: solid;
+  border-color: #B45309;
+  background: #FFF7ED;
+  box-shadow:
+    0 0 0 3px rgba(180, 83, 9, 0.18),
+    0 10px 28px rgba(180, 83, 9, 0.20),
+    0 2px 6px rgba(180, 83, 9, 0.16);
+}
+.fc-survey-likert-cell-nz.is-selected .fc-survey-likert-cell-num,
+.fc-survey-likert-cell-nz.is-selected .fc-survey-likert-cell-label {
+  color: #B45309;
+  font-style: normal;
+  font-weight: 600;
+}
 
 /* ── Textarea ──────────────────────────────────────────── */
 .fc-survey-ta {
@@ -3545,6 +3571,15 @@ details[open] > summary::before {
   font-weight: 400;
   margin-top: 2px;
 }
+.fc-survey-log-row.is-clickable { cursor: pointer; }
+.fc-survey-log-row.is-clickable:hover {
+  background: var(--surface-hover, rgba(91, 108, 184, 0.07));
+}
+.fc-survey-log-row .fc-survey-log-open {
+  opacity: 0;
+  transition: opacity 0.12s ease-in-out;
+}
+.fc-survey-log-row.is-clickable:hover .fc-survey-log-open { opacity: 1; }
 .fc-survey-matrix-cell-btn {
   appearance: none;
   background: transparent;

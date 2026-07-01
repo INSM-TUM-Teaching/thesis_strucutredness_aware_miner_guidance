@@ -25,155 +25,175 @@
 meta:
   class: structured
   label: Structured
-  status: "[ALIGNED-OVERLEAF 2026-06-26]"
+  status: '[ALIGNED-OVERLEAF 2026-07-01]'
   source: chapters/05_characteristics.tex · sec:final-questionnaire
-  # 3 T-items (max 3 Yes) · 4 E-items × 2 pt = max 8.
   phase_t_max: 3
   phase_e_max: 8
   combination:
-    # Equal weight per item: with 3 T-items and 4 E-items the combined fit is
-    # Fit = 3/7·Tfit + 4/7·Efit. Weights are derived from the live item counts
-    # in code (combine.class_weights), not hardcoded here.
     mode: weighted
     borderline_margin: 10
-    note: >-
-      Combined as Fit = (n_T·Tfit + n_E·Efit) / (n_T + n_E), i.e.
-      3/7·Tfit + 4/7·Efit; both legs also reported separately.
-
-# ── STUFE 1 — Capability/Routing (a-priori · no run · unscored) ─────────────
+    note: Combined as Fit = (n_T·Tfit + n_E·Efit) / (n_T + n_E), i.e. 3/7·Tfit + 4/7·Efit; both legs also
+      reported separately.
 stufe1:
-  - id: S1.1
-    kind: paradigm
-    sf: SF-1
-    question: >-
-      Which modeling paradigm does the miner follow per its specification —
-      imperative, declarative, or hybrid?
-    note: "Fixed miner property; pre-pended context, no score."
-
-# ── PHASE T — Theoretical (Score A · binary Yes/No · no run) ────────────────
-# Decided from spec/docs/source, not from the output. T-Fit = #Yes / #Items × 100.
+- id: S1.1
+  kind: paradigm
+  sf: SF-1
+  question: Which modeling paradigm does the miner follow per its specification — imperative, declarative,
+    or hybrid?
+  note: Fixed miner property; pre-pended context, no score.
 phase_t:
-  - id: T-S-BQ-1
-    axis: BQ
-    title: Documented restriction mechanism
-    measure: "Restriction step (cut / frequency / precision filter)"
-    question: >-
-      Does the selected setup document a discovery step that actively restricts
-      unsupported behavior, rather than only replaying the log (e.g. cut
-      detection, frequency or precision filter)?
-    doku_hint: "Discovery step that restricts behavior beyond replay (cut detection, frequency/precision filter)."
-    allow_nz: false
-    split_candidate: false
-    scale:
-      - {value: "ja",   label: "documents an active restriction step"}
-      - {value: "nein", label: "only replays the log / no restriction step"}
-    phase_t_seed:
-      imp:  {value: "ja",   note: "IMf cut detection actively restricts behavior."}
-      fus:  {value: "ja",   note: "Hybrid pipeline applies cut/pruning restriction. [verify]"}
-      decl: {value: "ja",   note: "MINERful support/confidence filtering restricts the constraint set. [verify]"}
-      pm4-heuristics: {value: "nein", note: "a-priori review open."}
-
-  - id: T-S-BQ-2
-    axis: BQ
-    title: Documented replayability guarantee
-    measure: "Fitness by construction"
-    question: >-
-      Does the algorithm or selected configuration provide a documented
-      replayability guarantee for the observed log behavior?
-    doku_hint: "Fitness/replay guarantee and default of the frequency/noise filter."
-    allow_nz: false
-    split_candidate: false
-    scale:
-      - {value: "ja",   label: "fitness by construction"}
-      - {value: "nein", label: "filters by default"}
-    phase_t_seed:
-      imp:  {value: "ja",   note: "IMf keeps every variant replayable by default (noise=0.20 is a filter, not a replay loss)."}
-      fus:  {value: "ja",   note: "Fusion hybrid guarantees replay via the PNwA core."}
-      decl: {value: "ja",   note: "MINERful returns constraints satisfied by all traces by default."}
-      pm4-heuristics: {value: "nein", note: "Heuristics miner filters frequency edges by default."}
-
-  - id: T-S-SF-1
-    axis: SF
-    title: Explicit connected control-flow
-    measure: "Connected control-flow notation / fixed global order"
-    question: >-
-      Does the output notation provide an explicit, connected control-flow
-      structure over the activities (sequence, choice, parallelism, loops), or
-      an unambiguous equivalent that fixes the global order?
-    doku_hint: "Notation catalog: connected control-flow constructs vs. unordered set."
-    allow_nz: false
-    split_candidate: false
-    scale:
-      - {value: "ja",   label: "explicit connected control-flow / fixed global order"}
-      - {value: "nein", label: "unordered / no connected control-flow"}
-    phase_t_seed:
-      imp:  {value: "ja",   note: "Process tree / Petri net: explicit connected control flow with start/end."}
-      fus:  {value: "ja",   note: "Hybrid inherits the directed imperative backbone. [verify]"}
-      decl: {value: "nein", note: "Declare is an unordered constraint set without connected control flow."}
-      pm4-heuristics: {value: "ja", note: "Petri net with source/sink is directed/connected. [verify]"}
-
-# ── PHASE E — Empirical (Score B · 0/1/2 on the model · scored) ─────────────
-# Judged on the model plus readable metrics. 4 items · max 8.
+- id: T-S-BQ-1
+  axis: BQ
+  title: Documented restriction mechanism
+  measure: Restriction step (cut / frequency / precision filter)
+  question: Does the selected setup document a mechanism that actively restricts behavior beyond the recorded
+    traces, rather than only reproducing the observed log?
+  doku_hint: Discovery step that restricts behavior beyond replay (cut detection, frequency/precision
+    filter).
+  allow_nz: false
+  split_candidate: false
+  scale:
+  - value: ja
+    label: documents an active restriction step
+  - value: nein
+    label: only replays the log / no restriction step
+  phase_t_seed:
+    imp:
+      value: ja
+      note: IMf cut detection actively restricts behavior.
+    fus:
+      value: ja
+      note: Hybrid pipeline applies cut/pruning restriction. [verify]
+    decl:
+      value: ja
+      note: MINERful support/confidence filtering restricts the constraint set. [verify]
+    pm4-heuristics:
+      value: nein
+      note: a-priori review open.
+- id: T-S-BQ-2
+  axis: BQ
+  title: Documented replayability guarantee
+  measure: Fitness by construction
+  question: Does the algorithm or selected configuration document a guarantee that the observed variants
+    remain replayable?
+  doku_hint: Fitness/replay guarantee and default of the frequency/noise filter.
+  allow_nz: false
+  split_candidate: false
+  scale:
+  - value: ja
+    label: documented guarantee that the observed variants remain replayable
+  - value: nein
+    label: no documented replay guarantee (observed variants may be dropped)
+  phase_t_seed:
+    imp:
+      value: ja
+      note: IMf keeps every variant replayable by default (noise=0.20 is a filter, not a replay loss).
+    fus:
+      value: ja
+      note: Fusion hybrid guarantees replay via the PNwA core.
+    decl:
+      value: ja
+      note: MINERful returns constraints satisfied by all traces by default.
+    pm4-heuristics:
+      value: nein
+      note: Heuristics miner filters frequency edges by default.
+- id: T-S-SF-1
+  axis: SF
+  title: Explicit connected control-flow
+  measure: Connected control-flow notation / fixed global order
+  question: Does the output notation provide an explicit, connected control-flow structure over the activities
+    (sequence, choice, parallelism, loops), or an equivalent notation that encodes the same relations
+    without loss?
+  doku_hint: 'Notation catalog: connected control-flow constructs vs. unordered set.'
+  allow_nz: false
+  split_candidate: false
+  scale:
+  - value: ja
+    label: explicit connected control-flow (sequence, choice, parallelism, loops), or equivalent notation without loss
+  - value: nein
+    label: unordered / no connected control-flow
+  phase_t_seed:
+    imp:
+      value: ja
+      note: 'Process tree / Petri net: explicit connected control flow with start/end.'
+    fus:
+      value: ja
+      note: Hybrid inherits the directed imperative backbone. [verify]
+    decl:
+      value: nein
+      note: Declare is an unordered constraint set without connected control flow.
+    pm4-heuristics:
+      value: ja
+      note: Petri net with source/sink is directed/connected. [verify]
 phase_e_gate: null
-
 phase_e:
-  - id: E-S-BQ-1
-    axis: BQ
-    title: Restriction of the behavior space
-    measure: "Precision"
-    question: >-
-      How narrowly does the output bound the behavioral space beyond the
-      observed variants?
-    route: >-
-      Model read plus precision metric where available; no cross-check against
-      the log or ARM. n/a (=0, flagged) if neither metric nor semantic/model
-      assessment is possible.
-    metric_keys: [etc_precision, precision]
-    allow_nz: true
-    scale:
-      - {score: 2, label: "tightly bounded; only limited unsupported combinations admitted"}
-      - {score: 1, label: "core structure bounded; noticeable extra combinations admitted"}
-      - {score: 0, label: "broadly permissive; central ordering/choice restrictions largely absent"}
-
-  - id: E-S-BQ-2
-    axis: BQ
-    title: Replayability of observed variants
-    measure: "Fitness / trace fit"
-    question: "Do the variants attested in the log remain replayable?"
-    route: >-
-      Metric where computable (fitness / trace fit); n/a (=0, flagged) if
-      neither metric nor semantic/model assessment is possible.
-    metric_keys: [replay_fitness, non_vacuous_satisfaction_rate]
-    allow_nz: true
-    scale:
-      - {score: 2, label: "all attested variants replayable"}
-      - {score: 1, label: "dominant variants remain replayable, individual rare ones drop"}
-      - {score: 0, label: "even frequent variants drop"}
-
-  - id: E-S-IN-1
-    axis: IN
-    title: Compactness / cognitive load
-    measure: "Compactness"
-    question: "How compactly does the output represent the behavior?"
-    route: "Observation; number only as proxy support."
-    metric_keys: [extended_cardoso_cfc, cfc, constraint_density]
-    allow_nz: false
-    scale:
-      - {score: 2, label: "compact; little superfluous load"}
-      - {score: 1, label: "medium; core recognizable but inflated"}
-      - {score: 0, label: "overloaded; size out of proportion to behavior"}
-
-  - id: E-S-IN-2
-    axis: IN
-    title: Order recognizability
-    measure: "Reading / flow order"
-    question: >-
-      To what extent can the execution order be read or reconstructed from the
-      output?
-    route: "Read off or reconstruct the order from the output."
-    metric_keys: []
-    allow_nz: false
-    scale:
-      - {score: 2, label: "clear order cues; main order easy to follow"}
-      - {score: 1, label: "partial order; loops/branches/missing start need reconstruction"}
-      - {score: 0, label: "no coherent order readable"}
+- id: E-S-BQ-1
+  axis: BQ
+  title: Restriction of the behavior space
+  measure: Precision
+  question: How narrowly does the output bound the behavioral space beyond the observed variants?
+  route: Model read plus precision metric where available; no cross-check against the log or ARM. n/a
+    (=0, flagged) if neither metric nor semantic/model assessment is possible.
+  metric_keys:
+  - etc_precision
+  - precision
+  allow_nz: true
+  scale:
+  - score: 2
+    label: probed unsupported combinations are rejected; only limited extra behavior admitted beyond the
+      observed variants
+  - score: 1
+    label: core ordering and choice restrictions hold, but noticeable unsupported combinations are admitted
+  - score: 0
+    label: central ordering and choice restrictions largely absent; unsupported combinations broadly admitted
+- id: E-S-BQ-2
+  axis: BQ
+  title: Replayability of observed variants
+  measure: Fitness / trace fit
+  question: Do the variants attested in the log remain replayable?
+  route: Metric where computable (fitness / trace fit); n/a (=0, flagged) if neither metric nor semantic/model
+    assessment is possible.
+  metric_keys:
+  - replay_fitness
+  - non_vacuous_satisfaction_rate
+  allow_nz: true
+  scale:
+  - score: 2
+    label: all attested variants replayable
+  - score: 1
+    label: dominant variants remain replayable, individual rare ones drop
+  - score: 0
+    label: even frequent variants drop
+- id: E-S-IN-1
+  axis: IN
+  title: Compactness / cognitive load
+  measure: Compactness
+  question: How compactly does the output represent the behavior?
+  route: Observation; number only as proxy support.
+  metric_keys:
+  - extended_cardoso_cfc
+  - cfc
+  - constraint_density
+  allow_nz: false
+  scale:
+  - score: 2
+    label: compact; little superfluous load
+  - score: 1
+    label: medium; core recognizable but inflated
+  - score: 0
+    label: overloaded; size out of proportion to behavior
+- id: E-S-IN-2
+  axis: IN
+  title: Order recognizability
+  measure: Reading / flow order
+  question: To what extent can the execution order be read or reconstructed from the output?
+  route: Read off or reconstruct the order from the output.
+  metric_keys: []
+  allow_nz: false
+  scale:
+  - score: 2
+    label: clear order cues; main order easy to follow
+  - score: 1
+    label: order only partly readable; loops, branches, or a missing start require reconstruction
+  - score: 0
+    label: no coherent order readable
