@@ -191,6 +191,11 @@ The tool is built to be extended, so you can grow the set of available algorithm
   in one of three standard formats: **PNML** (replayed with pm4py), **MINERful-native
   Declare-JSON**, or **BPMN** (converted to PNML and then treated the same way).
 
+See [`add_custom_miner.md`](add_custom_miner.md) for the full input/output contract,
+a worked example (a standalone Heuristics Miner in
+[`flex_compare/examples/heuristics_miner_cli.py`](flex_compare/examples/heuristics_miner_cli.py)),
+and how to extend the set of supported output formats.
+
 ---
 
 ## 4. Dependencies
